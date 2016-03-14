@@ -9,6 +9,11 @@ use App\Http\Requests;
 
 class SizeController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
         $sizes = Size::all();

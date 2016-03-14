@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'api'], function(){
     Route::resource('sizes', 'SizeController');
+    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
 });
 
 /*
