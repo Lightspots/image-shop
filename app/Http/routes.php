@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PublicController@index');
+
+Route::get('/a', 'AdmController@index');
 
 Route::group(['prefix' => 'api'], function(){
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
