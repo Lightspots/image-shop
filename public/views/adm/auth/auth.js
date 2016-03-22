@@ -7,7 +7,7 @@ angular.module('imageShopAdm.auth', [])
         $stateProvider
             .state('auth', {
                 url: '/auth',
-                templateUrl: "views/auth/auth.html",
+                templateUrl: "views/adm/auth/auth.html",
                 controller: 'AuthCtrl as auth'
             })
     }])

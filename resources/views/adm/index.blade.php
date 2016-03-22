@@ -10,7 +10,8 @@
     <script type="text/javascript" src="{{ asset('bower_components/satellizer/satellizer.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('views/auth/auth.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('views/adm/auth/auth.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('views/adm/home/home.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
