@@ -32,7 +32,7 @@ angular.module('imageShopAdm.auth', [])
                         var user = JSON.stringify(response.user);
                         localStorage.setItem('user', user);
                         $rootScope.currentUser = response.user;
-                        $state.go('jokes'); //TODO
+                        $state.go('home');
                     })
                     .error(function(){
                         vm.loginError = true;
