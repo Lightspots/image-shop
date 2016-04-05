@@ -1,0 +1,16 @@
+<tr>
+    <td>{{size.id}}</td>
+    <td>{{size.text}}</td>
+    <td>CHF {{size.price}}</td>
+    <td>
+        <button class="btn-link" ng-click="controller.show(size.id)">
+            <span class="glyphicon glyphicon-zoom-in"></span>
+        </button>
+        <button class="btn-link" ng-click="controller.delete(size.id)">
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <button class="btn-link" ng-click="controller.openEditSizeModal(size.id)">
+            <span class="glyphicon glyphicon-edit"></span>
+        </button>
+    </td>
+</tr>

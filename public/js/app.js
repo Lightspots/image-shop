@@ -6,7 +6,8 @@ angular.module('imageShopAdm', [
     'satellizer',
     'permission',
     'imageShopAdm.auth',
-    'imageShopAdm.home'
+    'imageShopAdm.home',
+    'imageShopAdm.size'
 ]).config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($stateProvider, $urlRouterProvider, $authProvider) {
 
     $authProvider.loginUrl = 'image-shop/public/api/authenticate';
