@@ -8,7 +8,13 @@ angular.module('imageShopAdm.home', [])
             .state('home', {
                 url: '/',
                 templateUrl: "views/adm/home/home.html",
-                controller: 'HomeCtrl as home'
+                controller: 'HomeCtrl as home',
+                data: {
+                    permissions: {
+                        except: ['anonymous'],
+                        redirectTo: 'auth'
+                    }
+                }
             })
     }])
 

@@ -22,6 +22,7 @@
     "bootstrap": "^3.3.6",
     "angular-bootstrap": "^1.2.4",
     "components-font-awesome": "^4.5.0",
-    "satellizer": "^0.14.0"
+    "satellizer": "^0.14.0",
+    "angular-permission": "^2.3.2"
   }
 }

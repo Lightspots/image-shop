@@ -8,7 +8,13 @@ angular.module('imageShopAdm.auth', [])
             .state('auth', {
                 url: '/auth',
                 templateUrl: "views/adm/auth/auth.html",
-                controller: 'AuthCtrl as auth'
+                controller: 'AuthCtrl as auth',
+                data: {
+                    permissions: {
+                        except: ['isloggedin'],
+                        redirectTo: 'home'
+                    }
+                }
             })
     }])
 

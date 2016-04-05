@@ -8,6 +8,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/angular/angular.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-ui-router/release/angular-ui-router.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/satellizer/satellizer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/angular-permission/dist/angular-permission.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/auth/auth.js') }}"></script>
@@ -49,9 +50,17 @@
             <ul class="nav navbar-nav">
                 <li ui-sref-active='active'><a ui-sref="home">Home</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" ng-show="currentUser != null">
+                <li><a href="">Welcome, @{{currentUser.name}}</a></li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Profile <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="logout()" style="cursor: pointer;">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-show="currentUser == null">
                 <li ui-sref-active='active'><a ui-sref="auth">Login</a></li>
-                <li><a href="" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
     </div> <!-- .container-fluid -->
