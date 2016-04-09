@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('village');
             $table->string('email');
             $table->decimal('price');
+            $table->string('finish');
             $table->timestamps();
         });
     }
