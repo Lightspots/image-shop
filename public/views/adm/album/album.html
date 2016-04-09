@@ -1,0 +1,19 @@
+<h2>Available Albums</h2>
+<button class="btn btn-primary" ng-click="ctrl.openCreateAlbumModal()">New</button>
+<hr>
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Path</th>
+        <th>Public</th>
+        <th>Key</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="s in ctrl.albums" album-element album="s"
+        controller="ctrl"></tr>
+    </tbody>
+</table>

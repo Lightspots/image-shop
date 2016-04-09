@@ -16,7 +16,7 @@ class AlbumController extends Controller
 
     public function index()
     {
-        $sizes = Album::where('public', '=' ,true)->where('deleted', '=', false)->get();
+        $sizes = Album::where('deleted', '=', false)->get();
         return \Response::json([
             'data' => $this->transformCollection($sizes)
         ], 200);
@@ -43,7 +43,66 @@ class AlbumController extends Controller
         ], 200);
     }
 
+    public function store(Request $request)
+    {
 
+        if (!$request->name or !$request->path) {
+            return \Response::json([
+                'error' => [
+                    'message' => 'Please Provide Both name and path'
+                ]
+            ], 422);
+        }
+
+        $album = Album::create($request->all());
+
+        if (!$request->public) {
+            $album->key = Album::generateKey();
+            $album->save();
+        }
+
+        if(!\File::exists(public_path(). "/albums/" . $album->path)) {
+            \File::makeDirectory(public_path(). '/albums/' . $album->path, 0777, true, true);
+        }
+
+        return \Response::json([
+            'message' => 'Size Created Succesfully',
+            'data' => $this->transform($album)
+        ], 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        if (!$request->name or !$request->path) {
+            return \Response::json([
+                'error' => [
+                    'message' => 'Please Provide Both name and path'
+                ]
+            ], 422);
+        }
+
+        $album = Album::find($id);
+
+        if ($album->path != $request->path) {
+            \File::deleteDirectory(public_path(). "/albums/" . $album->path);
+            \File::makeDirectory(public_path(). '/albums/' . $request->path, 0777, true, true);
+        }
+
+        if ($album->public && !$request->public) {
+            $album->key = Album::generateKey();
+        } elseif (!$album->public && $request->public) {
+            $album->key = null;
+        }
+
+        $album->name = $request->name;
+        $album->path = $request->path;
+        $album->public = $request->public;
+        $album->save();
+
+        return \Response::json([
+            'message' => 'Album Updated Succesfully'
+        ]);
+    }
 
     public function destroy($id)
     {
@@ -59,6 +118,8 @@ class AlbumController extends Controller
         $album->deleted = true;
         $album->save();
 
+        //\File::deleteDirectory(public_path(). "/albums/" . $album->path); TODO Ask Customer
+
         return \Response(200);
     }
 
@@ -73,11 +134,12 @@ class AlbumController extends Controller
             'id' => $album['id'],
             'path' => $album['path'],
             'name' => $album['name'],
-            'photos' => $this->imagesInDir($album['path'])
+            'public' => $album['public'],
+            'key' => $album['key']
         ];
     }
 
-    private function imagesInDir($dir) {
+    private function imagesInDir($dir) { //TODO Move to correct controller
         $files = \Storage::files("public/albums/" . $dir);
 
         $result = [];

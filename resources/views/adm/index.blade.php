@@ -15,6 +15,7 @@
     <script type="text/javascript" src="{{ asset('views/adm/auth/auth.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/home/home.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/size/size.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('views/adm/album/album.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
@@ -51,7 +52,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li ui-sref-active='active'><a ui-sref="home">Home</a></li>
-                <li ui-sref-active='active'><a ui-sref="album">Album</a></li>
+                <li ui-sref-active='active'><a ui-sref="albums">Album</a></li>
                 <li ui-sref-active='active'><a ui-sref="sizes">Size</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="currentUser != null">

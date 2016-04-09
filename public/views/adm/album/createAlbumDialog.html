@@ -1,24 +1,31 @@
 <form class="form-horizontal">
     <div class="modal-header">
         <button type="button" class="close" ng-click="ctrl.cancel()">&times;</button>
-        <h4 class="modal-title">Create Size</h4>
+        <h4 class="modal-title">Create Album</h4>
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <label class="col-sm-3 control-label" for="name">Text:</label>
+            <label class="col-sm-3 control-label" for="name">Name:</label>
             <div class="col-sm-8">
                 <input type="text" id="name" class="form-control"
-                       ng-model="ctrl.size.text" />
+                       ng-model="ctrl.album.name" />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label" for="desc">Price:</label>
+            <label class="col-sm-3 control-label" for="desc">Path:</label>
             <div class="col-sm-8">
                 <div class="input-group">
-                    <span class="input-group-addon">CHF</span>
-                    <input type="number" id="desc" class="form-control"
-                           ng-model="ctrl.size.price" />
+                    <span class="input-group-addon">public/albums/</span>
+                    <input type="text" id="desc" class="form-control"
+                           ng-model="ctrl.album.path" />
                 </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="public">Public:</label>
+            <div class="col-sm-8">
+                <input type="checkbox" id="public" class="form-control"
+                       ng-model="ctrl.album.public" />
             </div>
         </div>
     </div>

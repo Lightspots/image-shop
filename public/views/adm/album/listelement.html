@@ -1,0 +1,15 @@
+<tr>
+    <td>{{album.id}}</td>
+    <td>{{album.name}}</td>
+    <td>{{album.path}}</td>
+    <td>{{album.public}}</td>
+    <td>{{album.key}}</td>
+    <td>
+        <button class="btn-link" ng-click="controller.delete(album.id)">
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <button class="btn-link" ng-click="controller.openEditAlbumModal(album.id)">
+            <span class="glyphicon glyphicon-edit"></span>
+        </button>
+    </td>
+</tr>

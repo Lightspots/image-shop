@@ -9,7 +9,8 @@ angular.module('imageShopAdm', [
     'ngAnimate',
     'imageShopAdm.auth',
     'imageShopAdm.home',
-    'imageShopAdm.size'
+    'imageShopAdm.size',
+    'imageShopAdm.album'
 ]).config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($stateProvider, $urlRouterProvider, $authProvider) {
 
     $authProvider.loginUrl = 'image-shop/public/api/authenticate';
