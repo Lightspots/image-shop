@@ -108,6 +108,10 @@ angular.module('imageShopAdm.album', [])
             });
         };
 
+        this.process = function (id) {
+            $http.post('api/albums/process/' + id);
+        }
+
     }]).controller('AlbumDetailDialogController',
     ['$uibModalInstance', function ($uibModalInstance) {
 

@@ -10,7 +10,8 @@ use SplFileInfo;
 
 class AlbumController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
     }
 
@@ -61,8 +62,8 @@ class AlbumController extends Controller
             $album->save();
         }
 
-        if(!\File::exists(public_path(). "/albums/" . $album->path)) {
-            \File::makeDirectory(public_path(). '/albums/' . $album->path, 0777, true, true);
+        if (!\File::exists($this->getAlbumDir($album->path))) {
+            \File::makeDirectory($this->getAlbumDir($album->path), 0777, true, true);
         }
 
         return \Response::json([
@@ -84,8 +85,8 @@ class AlbumController extends Controller
         $album = Album::find($id);
 
         if ($album->path != $request->path) {
-            \File::deleteDirectory(public_path(). "/albums/" . $album->path);
-            \File::makeDirectory(public_path(). '/albums/' . $request->path, 0777, true, true);
+            \File::deleteDirectory($this->getAlbumDir($album->path));
+            \File::makeDirectory($this->getAlbumDir($request->path), 0777, true, true);
         }
 
         if ($album->public && !$request->public) {
@@ -118,9 +119,125 @@ class AlbumController extends Controller
         $album->deleted = true;
         $album->save();
 
-        //\File::deleteDirectory(public_path(). "/albums/" . $album->path); TODO Ask Customer
+        //\File::deleteDirectory($this->getAlbumDir($album->path)); //TODO Ask Customer
 
         return \Response(200);
+    }
+
+    public function processImagesOfAlbum($id)
+    {
+        $album = Album::find($id);
+        if (!$album) {
+            return \Response::json([
+                'error' => [
+                    'message' => 'Album does not exist'
+                ]
+            ], 404);
+        }
+
+        $images = $this->imagesInDir($this->getAlbumDir($album->path));
+
+        foreach ($images as $image) {
+            $imgPath = $this->getAlbumDir($album->path . '/' . $image[0]);
+            switch ($image[1]) {
+                case "png":
+                    $im = imagecreatefrompng($imgPath);
+                    list($width, $height) = getimagesize($imgPath);
+                    $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0]);
+                    $this->drawLines($im, $width, $height);
+                    imagepng($im, $this->getAlbumDir($album->path . '/c_' . $image[0]));
+                    imagedestroy($im);
+                    break;
+                case "jpg":
+                case "jpeg":
+                    $im = imagecreatefromjpeg($imgPath);
+                    list($width, $height) = getimagesize($imgPath);
+                    $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0]);
+                    $this->drawLines($im, $width, $height);
+                    imagejpeg($im, $this->getAlbumDir($album->path . '/c_' . $image[0]));
+                    imagedestroy($im);
+                    break;
+                default:
+                    return \Response(422);
+            }
+            \File::delete($imgPath);
+        }
+
+
+        return \Response(200);
+    }
+
+    private function drawLines($image, $width, $height)
+    {
+        $color = imagecolorallocate($image, 255, 255, 255);
+        imagesetthickness($image, 3);
+        $stepSize = 200;
+
+        if ($width > $height) {
+
+            $x = $width - $stepSize;
+            $end = $stepSize;
+            while ($x > -$width) {
+                imageline($image, $x, 0, $width, $end, $color);
+                $x -= $stepSize;
+                $end += $stepSize;
+            }
+        } else {
+            $y = $height - $stepSize;
+            $end = $stepSize;
+            while ($y > -$height) {
+                imageline($image, 0, $y, $end, $height, $color);
+                $y -= $stepSize;
+                $end += $stepSize;
+            }
+        }
+    }
+
+    private function createThumb($image, $width, $height, $ex, $path, $name)
+    {
+        $size = 500;
+        if ($width > $height) {
+            $thumb_w = $size;
+            $thumb_h = $height * ($size / $width);
+        } elseif ($width < $height) {
+            $thumb_w = $width * ($size / $height);
+            $thumb_h = $size;
+        } else {
+            $thumb_w = $size;
+            $thumb_h = $size;
+        }
+        if ($thumb_w < $width || $thumb_h < $height) {
+            $dst_img = imagecreatetruecolor($thumb_w, $thumb_h);
+
+            if ($ex == 'png') {
+                // integer representation of the color black (rgb: 0,0,0)
+                $background = imagecolorallocate($dst_img, 0, 0, 0);
+                // removing the black from the placeholder
+                imagecolortransparent($dst_img, $background);
+
+                // turning off alpha blending (to ensure alpha channel information
+                // is preserved, rather than removed (blending with the rest of the
+                // image in the form of black))
+                imagealphablending($dst_img, false);
+
+                // turning on alpha channel information saving (to ensure the full range
+                // of transparency is preserved)
+                imagesavealpha($dst_img, true);
+                imagecopyresampled($dst_img, $image, 0, 0, 0, 0, $thumb_w, $thumb_h, $width, $height);
+                imagepng($dst_img, $path . '/t_' . $name);
+            } else {
+                imagecopyresampled($dst_img, $image, 0, 0, 0, 0, $thumb_w, $thumb_h, $width, $height);
+                imagejpeg($dst_img, $path . '/t_' . $name);
+            }
+            imagedestroy($dst_img);
+        } else {
+            copy($path . '/' . $name, $path . '/t_' . $name);
+        }
+    }
+
+    private function getAlbumDir($path)
+    {
+        return public_path() . "/albums/" . $path;
     }
 
     private function transformCollection($albums)
@@ -139,17 +256,22 @@ class AlbumController extends Controller
         ];
     }
 
-    private function imagesInDir($dir) { //TODO Move to correct controller
-        $files = \Storage::files("public/albums/" . $dir);
+    private function imagesInDir($dir)
+    {
+        $files = \File::files($dir);
 
         $result = [];
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $f = new SplFileInfo($file);
             $ex = strtolower($f->getExtension());
-            if ($ex === "png" || $ex === "gif" || $ex === 'bmp' || $ex === "jpeg" || $ex === "jpg") {
-                $result[] = $f->getFilename();
+            if ($ex === "png" || $ex === "jpeg" || $ex === "jpg") {
+                if (starts_with($f->getFilename(), 't_') || starts_with($f->getFilename(), 'c_')) {
+                    continue;
+                }
+                $result[] = [$f->getFilename(), $ex];
             }
         }
         return $result;
     }
+
 }

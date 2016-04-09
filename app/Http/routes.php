@@ -24,6 +24,7 @@ Route::group(['prefix' => 'api'], function(){
 Route::group(['prefix' => 'api'], function(){
     Route::resource('sizes', 'SizeController');
     Route::resource('albums', 'AlbumController');
+    Route::post('albums/process/{id}', 'AlbumController@processImagesOfAlbum');
 });
 
 /*
