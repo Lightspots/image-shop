@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->decimal('price');
             $table->string('finish');
+            $table->boolean('deleted');
             $table->timestamps();
         });
     }

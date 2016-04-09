@@ -10,7 +10,9 @@ angular.module('imageShopAdm', [
     'imageShopAdm.auth',
     'imageShopAdm.home',
     'imageShopAdm.size',
-    'imageShopAdm.album'
+    'imageShopAdm.album',
+    'imageShopAdm.order',
+    'imageShopAdm.orderDetail'
 ]).config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($stateProvider, $urlRouterProvider, $authProvider) {
 
     $authProvider.loginUrl = 'image-shop/public/api/authenticate';

@@ -17,9 +17,9 @@ class AlbumController extends Controller
 
     public function index()
     {
-        $sizes = Album::where('deleted', '=', false)->get();
+        $albums = Album::where('deleted', '=', false)->get();
         return \Response::json([
-            'data' => $this->transformCollection($sizes)
+            'data' => $this->transformCollection($albums)
         ], 200);
     }
 

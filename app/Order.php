@@ -9,7 +9,7 @@ class Order extends Model
     protected $fillable = ['album_id', 'firstname', 'lastname', 'street', 'zip', 'village', 'email', 'price', 'finish'];
 
     public function album() {
-        return $this->hasOne('App\Album');
+        return $this->belongsTo('App\Album');
     }
 
     public function photo() {

@@ -1,0 +1,17 @@
+<h2>Available Orders</h2>
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Album</th>
+        <th>Customer</th>
+        <th>Count</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="s in ctrl.orders" order-element order="s"
+        controller="ctrl"></tr>
+    </tbody>
+</table>

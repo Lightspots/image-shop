@@ -1,0 +1,15 @@
+<tr>
+    <td>{{order.id}}</td>
+    <td>{{order.album.name}}</td>
+    <td>{{order.customer}}</td>
+    <td>{{order.count}}</td>
+    <td>CHF {{order.price}}</td>
+    <td>
+        <button class="btn-link" ng-click="controller.show(order.id)">
+            <span class="glyphicon glyphicon-zoom-in"></span>
+        </button>
+        <button class="btn-link" ng-click="controller.delete(order.id)">
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+    </td>
+</tr>
