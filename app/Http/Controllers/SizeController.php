@@ -54,7 +54,7 @@ class SizeController extends Controller
         return \Response::json([
             'message' => 'Size Created Succesfully',
             'data' => $this->transform($size)
-        ]);
+        ], 201);
     }
 
     public function update(Request $request, $id)

@@ -1,0 +1,30 @@
+<form class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="ctrl.cancel()">&times;</button>
+        <h4 class="modal-title">Create Size</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="name">Text:</label>
+            <div class="col-sm-8">
+                <input type="text" id="name" class="form-control"
+                       ng-model="ctrl.size.text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="desc">Price:</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <span class="input-group-addon">CHF</span>
+                    <input type="number" id="desc" rows="4" class="form-control"
+                           ng-model="ctrl.size.price" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                ng-click="ctrl.cancel()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="ctrl.ok()">Save</button>
+    </div>
+</form>

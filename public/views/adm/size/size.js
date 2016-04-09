@@ -3,7 +3,7 @@
  */
 angular.module('imageShopAdm.size', [])
 
-    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider',  function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('sizes', {
                 url: '/sizes',
@@ -18,7 +18,7 @@ angular.module('imageShopAdm.size', [])
             })
     }])
 
-    .controller('SizeCtrl', ['$state', '$http', '$rootScope', function ($state, $http, $rootScope) {
+    .controller('SizeCtrl', ['$state', '$http', '$rootScope', '$uibModal', '$location', function ($state, $http, $rootScope, $uibModal, $location) {
         var vm = this;
 
         this.getSizes = function () {
@@ -38,6 +38,86 @@ angular.module('imageShopAdm.size', [])
         };
 
         init();
+
+        this.delete = function (id) {
+            if (confirm('Delete Size ' + id + '?')) {
+                $http.delete('api/sizes/' + id).then(function (response) {
+                    vm.getSizes();
+                }, function (response) {
+                    console.log(response);
+                });
+            }
+        };
+
+        this.openCreateSizeModal = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'views/adm/size/createSizeDialog.html',
+                controller: 'SizeDetailDialogController as ctrl'
+            });
+
+            modalInstance.size = {
+                text: null,
+                price: ''
+            };
+
+            modalInstance.result.then(function (size) {
+                var config = {
+                    headers: {
+                        'Content-Type': 'application/json;'
+                    }
+                };
+
+                $http.post('api/sizes', size, config).then(function (response) {
+                    if (response.status == 201) {//Created
+                        vm.getSizes();
+                    }
+                }, function (response) {
+                    console.log(response);
+                });
+            });
+        };
+
+        this.openEditSizeModal = function (id) {
+
+            $http.get('api/sizes/' + id).success(function (data) {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'views/adm/size/createSizeDialog.html',
+                    controller: 'SizeDetailDialogController as ctrl'
+                });
+                data.data.price = parseFloat(data.data.price);
+                modalInstance.size = data.data;
+
+                modalInstance.result.then(function (size) {
+                    var config = {
+                        headers: {
+                            'Content-Type': 'application/json;'
+                        }
+                    };
+
+                    $http.put('api/sizes/' + id, size, config).then(function (response) {
+                        if (response.status == 200) {//Updated
+                            vm.getSizes();
+                        }
+                    }, function (response) {
+                        console.log(response);
+                    });
+                });
+            });
+        };
+
+    }]).controller('SizeDetailDialogController',
+    ['$uibModalInstance', function ($uibModalInstance) {
+
+
+        this.size = $uibModalInstance.size;
+
+        this.ok = function () {
+            $uibModalInstance.close(this.size);
+        };
+
+        this.cancel = function () {
+            $uibModalInstance.dismiss();
+        };
     }]).directive('sizeElement', function () {
         return {
             restrict: 'A',

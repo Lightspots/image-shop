@@ -5,6 +5,8 @@ angular.module('imageShopAdm', [
     'ui.router',
     'satellizer',
     'permission',
+    'ui.bootstrap',
+    'ngAnimate',
     'imageShopAdm.auth',
     'imageShopAdm.home',
     'imageShopAdm.size'

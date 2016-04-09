@@ -9,6 +9,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/angular-ui-router/release/angular-ui-router.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/satellizer/satellizer.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-permission/dist/angular-permission.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/angular-animate/angular-animate.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/auth/auth.js') }}"></script>
