@@ -8,7 +8,7 @@ angular.module('imageShop.home', [])
             .state('home', {
                 url: '/',
                 templateUrl: "views/public/home/home.html",
-                controller: 'HomeCtrl as home',
+                controller: 'HomeCtrl as home'
             })
     }])
 

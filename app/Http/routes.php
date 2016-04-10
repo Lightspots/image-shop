@@ -15,12 +15,14 @@ Route::get('/', 'PublicController@index');
 
 Route::get('/a', 'AdmController@index');
 
+//AUTH
 Route::group(['prefix' => 'api'], function(){
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
 });
 
+//ADM API
 Route::group(['prefix' => 'api'], function(){
     Route::resource('sizes', 'SizeController');
     Route::resource('albums', 'AlbumController');
@@ -28,6 +30,11 @@ Route::group(['prefix' => 'api'], function(){
     Route::get('orders', 'OrderController@index');
     Route::get('orders/{id}', 'OrderController@show');
     Route::delete('orders/{id}', 'OrderController@destroy');
+});
+
+//PUBLIC API
+Route::group(['prefix' => 'api'], function(){
+    Route::get('publicalbums', 'PublicController@publicAlbum');
 });
 
 /*

@@ -16,6 +16,7 @@
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/home/home.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('views/public/albums/album.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
@@ -33,6 +34,7 @@
             text-shadow: 0px 1px 1px #FFF;
             color: #9F9F9F;
             font-size: 10px;
+            padding-top: 25px;
         }
     </style>
 </head>

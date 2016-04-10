@@ -12,7 +12,7 @@ class AlbumController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
+        $this->middleware('jwt.auth');
     }
 
     public function index()
