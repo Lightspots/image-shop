@@ -109,7 +109,15 @@ angular.module('imageShopAdm.album', [])
         };
 
         this.process = function (id) {
-            $http.post('api/albums/process/' + id);
+            $http.post('api/albums/process/' + id).then(function (response) {
+                if (response.status == 200) {
+                    alert('Done');
+                } else {
+                    alert('Failure');
+                }
+            }, function (response) {
+                alert("Error");
+            });
         }
 
     }]).controller('AlbumDetailDialogController',
