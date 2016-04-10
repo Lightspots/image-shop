@@ -143,18 +143,18 @@ class AlbumController extends Controller
                 case "png":
                     $im = imagecreatefrompng($imgPath);
                     list($width, $height) = getimagesize($imgPath);
-                    $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0]);
+                    $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0], env('SHOP_SMALLIMAGESIZE'), 't_');
                     $this->drawLines($im, $width, $height);
-                    imagepng($im, $this->getAlbumDir($album->path . '/c_' . $image[0]));
+                    $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0], env('SHOP_IMAGESIZE'), 'c_');
                     imagedestroy($im);
                     break;
                 case "jpg":
                 case "jpeg":
                     $im = imagecreatefromjpeg($imgPath);
                     list($width, $height) = getimagesize($imgPath);
-                    $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0]);
+                    $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0], env('SHOP_SMALLIMAGESIZE'), 't_');
                     $this->drawLines($im, $width, $height);
-                    imagejpeg($im, $this->getAlbumDir($album->path . '/c_' . $image[0]));
+                    $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0], env('SHOP_IMAGESIZE'), 'c_');
                     imagedestroy($im);
                     break;
                 default:
@@ -193,9 +193,8 @@ class AlbumController extends Controller
         }
     }
 
-    private function createThumb($image, $width, $height, $ex, $path, $name)
+    private function createThumb($image, $width, $height, $ex, $path, $name, $size, $prefix)
     {
-        $size = 500;
         if ($width > $height) {
             $thumb_w = $size;
             $thumb_h = $height * ($size / $width);
@@ -224,14 +223,18 @@ class AlbumController extends Controller
                 // of transparency is preserved)
                 imagesavealpha($dst_img, true);
                 imagecopyresampled($dst_img, $image, 0, 0, 0, 0, $thumb_w, $thumb_h, $width, $height);
-                imagepng($dst_img, $path . '/t_' . $name);
+                imagepng($dst_img, $path . '/' . $prefix . $name);
             } else {
                 imagecopyresampled($dst_img, $image, 0, 0, 0, 0, $thumb_w, $thumb_h, $width, $height);
-                imagejpeg($dst_img, $path . '/t_' . $name);
+                imagejpeg($dst_img, $path . '/' . $prefix . $name);
             }
             imagedestroy($dst_img);
         } else {
-            copy($path . '/' . $name, $path . '/t_' . $name);
+            if ($ex == 'png') {
+                imagepng($image, $path . '/' . $prefix . $name);
+            } else {
+                imagejpeg($image, $path . '/' . $prefix . $name);
+            }
         }
     }
 
