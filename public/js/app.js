@@ -9,7 +9,8 @@ angular.module('imageShop', [
     'pascalprecht.translate',
     'imageShop.home',
     'imageShop.albums',
-    'imageShop.album'
+    'imageShop.album',
+    'imageShop.order'
 ]).config(['$stateProvider', '$urlRouterProvider', '$translateProvider', function($stateProvider, $urlRouterProvider, $translateProvider) {
     $urlRouterProvider.otherwise('/');
 

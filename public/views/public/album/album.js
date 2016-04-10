@@ -12,7 +12,7 @@ angular.module('imageShop.album', [])
             })
     }])
 
-    .controller('AlbumCtrl', ['$state', '$http', '$rootScope', 'albumService', '$location', '$uibModal', function($state, $http, $rootScope, albumService, $location, $uibModal) {
+    .controller('AlbumCtrl', ['$state', '$http', '$rootScope', 'albumService', 'orderService', '$location', '$uibModal', function($state, $http, $rootScope, albumService, orderService, $location, $uibModal) {
         var vm = this;
 
         this.currentPage = 1;
@@ -79,6 +79,15 @@ angular.module('imageShop.album', [])
                 modalInstance.album = vm.album;
             };
             img.src = 'albums/' + vm.album.path + '/c_' + photo;
+        };
+        
+        this.order = function () {
+            orderService.album = vm.album;
+            orderService.photos = [];
+            for (var key in vm.checked) {
+                orderService.photos.push(key);
+            }
+            $location.path('/order');
         };
 
     }]).controller('PhotoDialogController',
