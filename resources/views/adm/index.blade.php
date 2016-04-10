@@ -11,7 +11,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/angular-permission/dist/angular-permission.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-animate/angular-animate.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/admApp.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/auth/auth.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/home/home.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/size/size.js') }}"></script>

@@ -24,6 +24,9 @@
     "components-font-awesome": "^4.5.0",
     "satellizer": "^0.14.0",
     "angular-permission": "^2.3.2",
-    "angular-animate": "^1.5.3"
+    "angular-animate": "^1.5.3",
+    "angular-translate": "^2.11.0",
+    "angular-translate-loader-static-files": "^2.11.0",
+    "angular-sanitize": "^1.5.3"
   }
 }
