@@ -17,7 +17,6 @@
     <script type="text/javascript" src="{{ asset('views/adm/size/size.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/album/album.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/order/order.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('views/adm/orderDetail/orderDetail.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
