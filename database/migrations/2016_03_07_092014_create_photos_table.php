@@ -19,6 +19,7 @@ class CreatePhotosTable extends Migration
             $table->string('path');
             $table->string('size');
             $table->decimal('price');
+            $table->integer('count');
             $table->timestamps();
         });
     }
