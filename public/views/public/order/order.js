@@ -63,10 +63,15 @@ angular.module('imageShop.order', [])
             vm.photos.forEach(function (entry) {
                 vm.onChange[entry] = function () {
                     var size = getSize(vm.orders[entry].size);
-                    if (vm.orders[entry].piece < 1) {
-                        vm.orders[entry].piece = 1;
+                    if (size) {
+                        if (vm.orders[entry].piece < 1) {
+                            vm.orders[entry].piece = 1;
+                        }
+                        vm.orders[entry].price = size.price * vm.orders[entry].piece;
+                    } else {
+                        vm.orders[entry].piece = 0;
+                        vm.orders[entry].price = 0;
                     }
-                    vm.orders[entry].price = size.price * vm.orders[entry].piece;
                 }
             })
         };
@@ -81,10 +86,15 @@ angular.module('imageShop.order', [])
 
         this.selectAllChanged = function () {
             var size = getSize(vm.all.size);
-            if (vm.all.piece < 1) {
-                vm.all.piece = 1;
+            if (size) {
+                if (vm.all.piece < 1) {
+                    vm.all.piece = 1;
+                }
+                vm.all.price = size.price * vm.all.piece;
+            } else {
+                vm.all.piece = 0;
+                vm.all.price = 0;
             }
-            vm.all.price = size.price * vm.all.piece;
         };
 
         init();
