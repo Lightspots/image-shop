@@ -17,6 +17,7 @@
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/home/home.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/albums/album.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('views/public/album/album.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>

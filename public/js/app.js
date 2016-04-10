@@ -8,7 +8,8 @@ angular.module('imageShop', [
     'ngSanitize',
     'pascalprecht.translate',
     'imageShop.home',
-    'imageShop.albums'
+    'imageShop.albums',
+    'imageShop.album'
 ]).config(['$stateProvider', '$urlRouterProvider', '$translateProvider', function($stateProvider, $urlRouterProvider, $translateProvider) {
     $urlRouterProvider.otherwise('/');
 

@@ -12,7 +12,7 @@ angular.module('imageShop.albums', [])
             })
     }])
 
-    .controller('AlbumsCtrl', ['$state', '$http', '$rootScope', function($state, $http, $rootScope) {
+    .controller('AlbumsCtrl', ['$state', '$http', '$rootScope', 'albumService', '$location', function($state, $http, $rootScope, albumService, $location) {
         var vm = this;
 
         var init = function () {
@@ -28,6 +28,12 @@ angular.module('imageShop.albums', [])
         };
 
         init();
+
+        this.show = function (id) {
+            albumService.album.id = id;
+            albumService.album.key = null;
+            $location.path('/album');
+        }
 
 
     }]).directive('albumElement', function () {

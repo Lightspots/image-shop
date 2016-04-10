@@ -1,0 +1,13 @@
+<form class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="ctrl.close()">&times;</button>
+        <h4 class="modal-title">{{ctrl.photo}}</h4>
+    </div>
+    <div class="modal-body">
+        <img src="images/trans.png" ng-attr-width="{{ctrl.width}}" ng-attr-height="{{ctrl.height}}" style="background-position: center; background-image: url('albums/{{ctrl.album.path}}/c_{{ctrl.photo}}')">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                ng-click="ctrl.close()">Close</button>
+    </div>
+</form>

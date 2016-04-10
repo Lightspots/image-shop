@@ -4,9 +4,9 @@
 <hr>
 <form class="">
     <div class="input-group">
-        <input type="text" class="form-control" ng-attr-placeholder="{{'LOGIN_PLACEHOLDER' | translate}}">
+        <input type="text" class="form-control" ng-model="home.key" ng-attr-placeholder="{{'LOGIN_PLACEHOLDER' | translate}}" required>
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" translate="LOGIN_TEXT">Go!</button>
+        <button class="btn btn-default" type="button" translate="LOGIN_TEXT" ng-click="home.show()">Go!</button>
       </span>
     </div>
 </form>

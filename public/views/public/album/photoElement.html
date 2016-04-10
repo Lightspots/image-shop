@@ -1,0 +1,8 @@
+<p style="text-align: center">{{photo}}</p>
+<img class="img-responsive img-thumbnail img" ng-click="controller.show(photo)" ng-src="albums/{{controller.album.path}}/t_{{photo}}">
+<div class="checkbox">
+    <label>
+        <input type="checkbox" ng-model="controller.checked[photo]" value="">
+        <span translate="CHECKBOX"></span>
+    </label>
+</div>
