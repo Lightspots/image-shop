@@ -28,7 +28,7 @@ angular.module('imageShopAdm.order', [])
                 } else {
                     response.data.data.forEach(function (entry) {
                         entry.count = entry.photos.length;
-                        entry.customer = entry.firstname + " " + entry.lastname + ", " + entry.village;
+                        entry.customer = entry.firstname + " " + entry.lastname + ", " + entry.city;
                     });
                     vm.orders = response.data.data;
                 }

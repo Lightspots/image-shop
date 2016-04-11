@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('lastname');
             $table->string('street');
             $table->string('zip');
-            $table->string('village');
+            $table->string('city');
             $table->string('email');
             $table->string('remark');
             $table->decimal('price');

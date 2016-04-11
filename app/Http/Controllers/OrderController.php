@@ -70,7 +70,7 @@ class OrderController extends Controller
             'lastname' => $order['lastname'],
             'street' => $order['street'],
             'zip' => $order['zip'],
-            'village' => $order['village'],
+            'city' => $order['city'],
             'email' => $order['email'],
             'photos' => $this->transformPhotos($order['photo']),
             'price' => $order['price'],
