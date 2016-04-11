@@ -5,11 +5,75 @@
     </div>
     <div class="modal-body">
         <p translate="ORDER_FORM_TEXT"></p>
+        <h4 translate="ORDER_FORM_HEADER"></h4>
+        <div class="form-group">
+            <label for="inputFirstName" class="col-sm-2 control-label"><span translate="FORM_FIRSTNAME"></span></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputFirstName" ng-model="ctrl.person.firstname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLastName" class="col-sm-2 control-label"><span translate="FORM_LASTNAME"></span></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLastName" ng-model="ctrl.person.lastname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress" class="col-sm-2 control-label"><span translate="FORM_ADDRESS"></span></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputAddress" ng-model="ctrl.person.address">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputZip" class="col-sm-2 control-label"><span translate="FORM_ZIP"></span></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputZip" ng-model="ctrl.person.zip">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputCity" class="col-sm-2 control-label"><span translate="FORM_CITY"></span></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputCity" ng-model="ctrl.person.city">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label"><span translate="FORM_EMAIL"></span></label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail" ng-model="ctrl.person.email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span translate="FORM_PAYTYPE"></span></label>
+            <div class="col-sm-10">
+                <p type="text" class="form-control-static" translate="FORM_PAY_BILL"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox" style="text-align: left;">
+                    <label>
+                        <input type="checkbox" ng-model="ctrl.agb"> <span translate="FORM_AGB_AGREE"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <h3 translate="FORM_SUMMARY"></h3>
+        <h4>{{ctrl.album.name}}</h4>
+        <h5><span translate="FORM_FINISH"></span> <span>{{ctrl.finish}}</span></h5>
+        <ul>
+        <li ng-repeat="o in ctrl.orders"
+             controller="ctrl">
+            <span translate="FORM_FILE"></span>: {{o.photo}}, <span translate="FORM_FORMAT"></span>: {{o.size}}, {{o.piece}} <span translate="PIECE"></span>
+            <span translate="FORM_FOR"></span> {{o.price}}
+        </li>
+        </ul>
+        <b translate="FORM_SUMMARYPRICE"></b> <b translate="CURRENCY"></b> <b>{{ctrl.price}}</b>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default"
                 ng-click="ctrl.cancel()" translate="CANCEL">Close</button>
         <button type="button" class="btn btn-primary"
-                ng-click="ctrl.ok()" translate="ORDER"></button>
+                ng-click="ctrl.ok()" translate="FORM_SEND_ORDER"></button>
     </div>
 </form>

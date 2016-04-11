@@ -18,7 +18,8 @@ angular.module('imageShop.order', [])
         vm.all = {
             size: -1,
             piece : 0,
-            price : 0
+            price : 0,
+            finish: 'GLOSSY'
         };
         
         vm.pieces = 0;
@@ -122,8 +123,52 @@ angular.module('imageShop.order', [])
             vm.pieces = count;
         };
 
+        this.order = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'views/public/order/orderDialog.html',
+                controller: 'OrderDialogController as ctrl',
+                size: 'lg'
+            });
+
+            modalInstance.album = vm.album;
+            modalInstance.price = vm.price;
+            modalInstance.finish = vm.all.finish;
+            var orders = [];
+            for (var key in vm.orders) {
+                for (var i = 0; i<vm.orders[key].length; i++) {
+                    orders.push({
+                        photo: key,
+                        size: getSize(vm.orders[key][i].size).text,
+                        piece: vm.orders[key][i].piece,
+                        price: vm.orders[key][i].price
+                    });
+                }
+
+            }
+
+            modalInstance.orders = orders;
+        };
+
         init();
 
+    }]).controller('OrderDialogController',
+    ['$uibModalInstance', '$translate', function ($uibModalInstance, $translate) {
+        var vm = this;
+
+        this.album = $uibModalInstance.album;
+        this.orders = $uibModalInstance.orders;
+        this.price = $uibModalInstance.price;
+        $translate($uibModalInstance.finish).then(function (text) {
+            vm.finish = text;
+        });
+
+        this.ok = function () {
+            $uibModalInstance.close(this.person);
+        };
+
+        this.cancel = function () {
+            $uibModalInstance.dismiss();
+        };
     }]).directive('orderPhotoElement', function () {
     return {
         restrict: 'A',

@@ -35,10 +35,10 @@
 <hr>
 <form>
     <label class="radio-inline">
-        <input type="radio" name="finishOption" id="radioGlossy" checked><span translate="GLOSSY"></span>
+        <input type="radio" name="finishOption" id="radioGlossy" ng-model="ctrl.all.finish" value="GLOSSY"><span translate="GLOSSY"></span>
     </label>
     <label class="radio-inline">
-        <input type="radio" name="finishOption" id="radioDull"><span translate="DULL"></span>
+        <input type="radio" name="finishOption" id="radioDull" ng-model="ctrl.all.finish" value="DULL"><span translate="DULL"></span>
     </label>
     <div>
         <div class="row order-border" ng-repeat="p in ctrl.photos" order-photo-element photo="p"
