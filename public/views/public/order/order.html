@@ -10,6 +10,12 @@
     .checkbox {
         text-align: center;
     }
+
+    .order-border {
+        border-top: 1px solid #e6e6e6;
+        border-bottom: 1px solid #e6e6e6;
+        padding: 5px;
+    }
 </style>
 <form>
     <div class="form-inline">
@@ -35,7 +41,9 @@
         <input type="radio" name="finishOption" id="radioDull"><span translate="DULL"></span>
     </label>
     <div>
-        <div class="row" ng-repeat="p in ctrl.photos" order-photo-element photo="p"
+        <div class="row order-border" ng-repeat="p in ctrl.photos" order-photo-element photo="p"
              controller="ctrl"></div>
     </div>
+    <p>{{ctrl.pieces}} <span translate="ORDER_FOOTER_TEXT"></span> <span translate="CURRENCY"></span> {{ctrl.price}}</p>
+    <button type="button" class="btn btn-default" ng-click="ctrl.order()" translate="NEXT"></button>
 </form>

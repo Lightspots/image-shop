@@ -85,10 +85,12 @@ angular.module('imageShop.album', [])
             orderService.album = vm.album;
             orderService.photos = [];
             for (var key in vm.checked) {
-                console.log(vm.checked[key]);
                 if (vm.checked[key] == true) {
                     orderService.photos.push(key);
                 }
+            }
+            if (orderService.photos.length < 1) {
+                return;
             }
             $location.path('/order');
         };

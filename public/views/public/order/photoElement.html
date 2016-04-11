@@ -1,24 +1,8 @@
 <div class="col-md-4">
     <p style="text-align: center;">{{photo}}</p>
     <img class="img-responsive img-thumbnail img" ng-src="albums/{{controller.album.path}}/t_{{photo}}">
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" ng-model="controller.remove[photo]" value="">
-            <span translate="REMOVE"></span>
-        </label>
-    </div>
 </div>
 <div class="col-md-8">
-    <div class="form-inline">
-        <select class="form-control" ng-change="controller.onChange[photo]()"
-                ng-model="controller.orders[photo].size">
-            <option value="-1">----</option>
-            <option ng-repeat="size in controller.sizes" value="{{size.id}}">{{size.text}}</option>
-        </select>
-        <div class="input-group">
-            <input type="number" class="form-control" aria-describedby="piece-addon" style="width: 75px;" ng-model="controller.orders[photo].piece" ng-change="controller.onChange[photo]()">
-            <span class="input-group-addon" translate="PIECE"></span>
-            <span class="input-group-addon">CHF {{controller.orders[photo].price}}</span>
-        </div>
-    </div>
+    <div class="row" ng-repeat="i in controller.orders[photo]" order-input-element photo="photo" number="i.num"
+         controller="controller"></div>
 </div>

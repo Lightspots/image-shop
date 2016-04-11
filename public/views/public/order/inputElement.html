@@ -1,0 +1,13 @@
+<div class="form-inline">
+    <select class="form-control" ng-change="controller.onChange(photo, number)"
+            ng-model="controller.orders[photo][number].size">
+        <option value="-1">----</option>
+        <option ng-repeat="size in controller.sizes" value="{{size.id}}">{{size.text}}</option>
+    </select>
+    <div class="input-group">
+        <input type="number" class="form-control" aria-describedby="piece-addon" style="width: 75px;" ng-model="controller.orders[photo][number].piece" ng-change="controller.onChange(photo, number)">
+        <span class="input-group-addon" translate="PIECE"></span>
+        <span class="input-group-addon">CHF {{controller.orders[photo][number].price}}</span>
+    </div>
+    <button type="button" class="btn btn-default btn-sm" ng-click="controller.addInputLine(photo)"><span class="glyphicon glyphicon-plus"></span></button>
+</div>

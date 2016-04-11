@@ -20,6 +20,9 @@ angular.module('imageShop.order', [])
             piece : 0,
             price : 0
         };
+        
+        vm.pieces = 0;
+        vm.price = 0;
 
         vm.orders = {};
 
@@ -32,14 +35,14 @@ angular.module('imageShop.order', [])
                 return;
             }
             vm.photos.forEach(function (entry) {
-                vm.orders[entry] = {
+                vm.orders[entry] = [];
+                vm.orders[entry][0] = {
+                    num: 0,
                     size : -1,
                     piece: 0,
                     price: 0
                 };
             });
-
-            createOnChangeFunctions();
         };
 
         var getSizes = function () {
@@ -58,30 +61,39 @@ angular.module('imageShop.order', [])
             }
         };
 
-        var createOnChangeFunctions = function () {
-            vm.onChange = {};
-            vm.photos.forEach(function (entry) {
-                vm.onChange[entry] = function () {
-                    var size = getSize(vm.orders[entry].size);
-                    if (size) {
-                        if (vm.orders[entry].piece < 1) {
-                            vm.orders[entry].piece = 1;
-                        }
-                        vm.orders[entry].price = size.price * vm.orders[entry].piece;
-                    } else {
-                        vm.orders[entry].piece = 0;
-                        vm.orders[entry].price = 0;
-                    }
+        this.onChange = function (entry, number) {
+            var size = getSize(vm.orders[entry][number].size);
+            if (size) {
+                if (vm.orders[entry][number].piece < 1) {
+                    vm.orders[entry][number].piece = 1;
                 }
-            })
+                vm.orders[entry][number].price = size.price * vm.orders[entry][number].piece;
+            } else {
+                vm.orders[entry][number].piece = 0;
+                vm.orders[entry][number].price = 0;
+            }
+            calcPrice();
+        };
+        
+        this.addInputLine = function (entry) {
+            if (vm.orders[entry].length >= vm.sizes.length) {
+                return;
+            }
+            vm.orders[entry].push({
+                num: vm.orders[entry].length,
+                size : -1,
+                piece: 0,
+                price: 0
+            });  
         };
 
         this.setOptions = function () {
             for (var key in vm.orders) {
-                vm.orders[key].size = vm.all.size;
-                vm.orders[key].piece = vm.all.piece;
-                vm.orders[key].price = vm.all.price;
+                vm.orders[key][0].size = vm.all.size;
+                vm.orders[key][0].piece = vm.all.piece;
+                vm.orders[key][0].price = vm.all.price;
             }
+            calcPrice();
         };
 
         this.selectAllChanged = function () {
@@ -97,6 +109,19 @@ angular.module('imageShop.order', [])
             }
         };
 
+        var calcPrice = function () {
+            var count = 0;
+            var price = 0;
+            for (var key in vm.orders) {
+                for (var i = 0; i < vm.orders[key].length; i++) {
+                    count += vm.orders[key][i].piece;
+                    price += vm.orders[key][i].price;
+                }
+            }
+            vm.price = Math.round(price * 100) / 100;
+            vm.pieces = count;
+        };
+
         init();
 
     }]).directive('orderPhotoElement', function () {
@@ -108,9 +133,15 @@ angular.module('imageShop.order', [])
             controller: '=controller'
         }
     };
-}).service('orderService', function () {
-    this.album = {
-        'id': null,
-        'key': null
+    }).directive('orderInputElement', function () {
+    return {
+        restrict: 'A',
+        templateUrl: 'views/public/order/inputElement.html',
+        scope: {
+            photo: '=photo',
+            number: '=number',
+            controller: '=controller'
+        }
     };
-});
+    }).service('orderService', function () {
+    });
