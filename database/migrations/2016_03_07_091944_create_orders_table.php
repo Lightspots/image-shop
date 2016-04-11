@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('zip');
             $table->string('village');
             $table->string('email');
+            $table->string('remark');
             $table->decimal('price');
             $table->string('finish');
             $table->boolean('deleted');

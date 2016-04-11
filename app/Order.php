@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['album_id', 'firstname', 'lastname', 'street', 'zip', 'village', 'email', 'price', 'finish'];
+    protected $fillable = ['album_id', 'firstname', 'lastname', 'street', 'zip', 'village', 'email', 'price', 'finish', 'remark'];
 
     public function album() {
         return $this->belongsTo('App\Album');
