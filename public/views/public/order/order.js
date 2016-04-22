@@ -152,7 +152,7 @@ angular.module('imageShop.order', [])
         init();
 
     }]).controller('OrderDialogController',
-    ['$uibModalInstance', '$translate', function ($uibModalInstance, $translate) {
+    ['$uibModalInstance', '$translate' , '$scope', function ($uibModalInstance, $translate, $scope) {
         var vm = this;
 
         this.album = $uibModalInstance.album;
@@ -163,7 +163,9 @@ angular.module('imageShop.order', [])
         });
 
         this.ok = function () {
-            $uibModalInstance.close(this.person);
+            if ($scope.orderForm.$valid) {
+                $uibModalInstance.close(this.person);
+            }
         };
 
         this.cancel = function () {
