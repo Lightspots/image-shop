@@ -16,7 +16,7 @@ angular.module('imageShop.order', [])
         var vm = this;
 
         vm.all = {
-            size: -1,
+            size: '-1',
             piece : 0,
             price : 0,
             finish: 'GLOSSY'
@@ -39,7 +39,7 @@ angular.module('imageShop.order', [])
                 vm.orders[entry] = [];
                 vm.orders[entry][0] = {
                     num: 0,
-                    size : -1,
+                    size : '-1',
                     piece: 0,
                     price: 0
                 };
@@ -82,7 +82,7 @@ angular.module('imageShop.order', [])
             }
             vm.orders[entry].push({
                 num: vm.orders[entry].length,
-                size : -1,
+                size : '-1',
                 piece: 0,
                 price: 0
             });  
