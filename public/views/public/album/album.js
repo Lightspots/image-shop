@@ -12,7 +12,7 @@ angular.module('imageShop.album', [])
             })
     }])
 
-    .controller('AlbumCtrl', ['$state', '$http', '$rootScope', 'albumService', 'orderService', '$location', '$uibModal', function($state, $http, $rootScope, albumService, orderService, $location, $uibModal) {
+    .controller('AlbumCtrl', ['$http', 'albumService', 'orderService', '$location', '$uibModal', 'notifyService', function($http, albumService, orderService, $location, $uibModal, notifyService) {
         var vm = this;
 
         this.currentPage = 1;
@@ -26,6 +26,7 @@ angular.module('imageShop.album', [])
                 id = albumService.album.key;
             } else {
                 $location.path('/');
+                if (albumService.album.key !== null && albumService.album.id !== null)
                 albumService.invalidAlbum = true;
                 albumService.album.key = null;
                 albumService.album.id = null;
@@ -42,10 +43,15 @@ angular.module('imageShop.album', [])
                 vm.totalPhotos = vm.album.photos.length;
                 vm.pageChanged();
             }, function (response) {
-                albumService.invalidAlbum = true;
-                albumService.album.key = null;
-                albumService.album.id = null;
-                $location.path('/');
+                if (response.status == 404) {
+                    albumService.invalidAlbum = true;
+                    albumService.album.key = null;
+                    albumService.album.id = null;
+                    $location.path('/');
+                } else {
+                    notifyService.error('HTTP_ERROR');
+                    console.log(response.status)
+                }
             });
         };
 
@@ -95,6 +101,7 @@ angular.module('imageShop.album', [])
                 }
             }
             if (orderService.photos.length < 1) {
+                notifyService.warn('ORDER_WARNING_SELECT_MIN');
                 return;
             }
             $location.path('/order');
