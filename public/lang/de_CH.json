@@ -42,5 +42,6 @@
   "CANCEL": "Abbrechen",
   "CLOSE": "Schliessen",
   "NEXT": "Weiter",
-  "CURRENCY": "CHF"
+  "CURRENCY": "CHF",
+  "HTTP_ERROR": "Fehler beim herstellen der Verbindung, bitte versuchen Sie es später nochmals"
 }

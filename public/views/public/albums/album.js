@@ -12,7 +12,7 @@ angular.module('imageShop.albums', [])
             })
     }])
 
-    .controller('AlbumsCtrl', ['$state', '$http', '$rootScope', 'albumService', '$location', function($state, $http, $rootScope, albumService, $location) {
+    .controller('AlbumsCtrl', ['$state', '$http', '$rootScope', 'albumService', '$location', 'nofityService', function($state, $http, $rootScope, albumService, $location, nofityService) {
         var vm = this;
 
         var init = function () {
@@ -23,7 +23,8 @@ angular.module('imageShop.albums', [])
             $http.get('api/publicalbums').then(function (response) {
                 vm.albums = response.data.data;
             }, function (response) {
-                //TODO
+                nofityService.error('HTTP_ERROR');
+                console.log(response.status)
             });
         };
 
