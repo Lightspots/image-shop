@@ -12,7 +12,7 @@ angular.module('imageShop.order', [])
             })
     }])
 
-    .controller('OrderCtrl', ['$state', '$http', '$rootScope', 'orderService', '$location', '$uibModal', function ($state, $http, $rootScope, orderService, $location, $uibModal) {
+    .controller('OrderCtrl', ['$http', 'orderService', '$location', '$uibModal', 'ngNotify', '$translate', function ($http, orderService, $location, $uibModal, ngNotify, $translate) {
         var vm = this;
 
         vm.all = {
@@ -140,6 +140,14 @@ angular.module('imageShop.order', [])
 
             }
             if (orders.length < 1) {
+                $translate('ORDER_WARNING_SELECT_MIN').then(function (txt) {
+                    ngNotify.set(txt, {
+                        type: 'warn',
+                        duration: 5000,
+                        html: true
+                    });
+                });
+                
                 return;
             }
 
@@ -160,7 +168,7 @@ angular.module('imageShop.order', [])
         init();
 
     }]).controller('OrderDialogController',
-    ['$uibModalInstance', '$translate' , '$scope', function ($uibModalInstance, $translate, $scope) {
+    ['$uibModalInstance', '$translate' , '$scope', 'ngNotify', function ($uibModalInstance, $translate, $scope, ngNotify) {
         var vm = this;
 
         this.album = $uibModalInstance.album;
@@ -173,6 +181,14 @@ angular.module('imageShop.order', [])
         this.ok = function () {
             if ($scope.orderForm.$valid) {
                 $uibModalInstance.close(this.person);
+            } else {
+                $translate('ORDER_WARNING_FILL_FIELDS').then(function (txt) {
+                    ngNotify.set(txt, {
+                        type: 'warn',
+                        duration: 5000,
+                        html: true
+                    });
+                });
             }
         };
 

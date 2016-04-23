@@ -7,6 +7,7 @@ angular.module('imageShop', [
     'ngAnimate',
     'ngSanitize',
     'pascalprecht.translate',
+    'ngNotify',
     'imageShop.home',
     'imageShop.albums',
     'imageShop.album',

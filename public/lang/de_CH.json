@@ -12,6 +12,8 @@
   "GLOSSY": "glanz",
   "DULL": "matt",
   "ORDER_FOOTER_TEXT": "Stück ausgewählt, Summe (inkl. MwSt., zzgl. Versandkosten)",
+  "ORDER_WARNING_SELECT_MIN": "Sie müssen mindestens ein Foto wählen!",
+  "ORDER_WARNING_FILL_FIELDS": "Füllen Sie alle benötigten Felder aus!",
   "ORDER_FORM": "Bestell Formular",
   "ORDER_FORM_TEXT": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut <br> labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
   "ORDER_FORM_HEADER": "Adresse",

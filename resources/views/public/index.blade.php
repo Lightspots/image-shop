@@ -13,6 +13,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/angular-sanitize/angular-sanitize.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-translate/angular-translate.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/ng-notify/dist/ng-notify.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/home/home.js') }}"></script>
@@ -27,6 +28,7 @@
 
     <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('bower_components/components-font-awesome/css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/ng-notify/dist/ng-notify.min.css')}}">
 
     <style type="text/css">
         [ng\:cloak], [ng-cloak], .ng-cloak {
