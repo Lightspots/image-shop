@@ -12,16 +12,23 @@ angular.module('imageShop.home', [])
             })
     }])
 
-    .controller('HomeCtrl', ['$state', '$http', '$rootScope', 'albumService', '$location', function($state, $http, $rootScope, albumService, $location) {
+    .controller('HomeCtrl', ['$state', '$http', 'notifyService', 'albumService', '$location', function($state, $http, notifyService, albumService, $location) {
         var vm = this;
+        console.log(albumService.invalidAlbum);
+        if (albumService.invalidAlbum) {
+            notifyService.error('LOGIN_INVALID_ERROR');
+            albumService.invalidAlbum = false;
+        }
 
         this.show = function () {
             if (vm.key == null || vm.key == '') {
+                notifyService.warn('LOGIN_EMPTY_WARNING');
                 return;
             }
 
             if (jQuery.isNumeric(vm.key)) {
                 vm.key = null;
+                notifyService.error('LOGIN_INVALID_ERROR');
                 return;
             }
 

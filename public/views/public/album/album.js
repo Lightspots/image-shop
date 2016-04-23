@@ -26,6 +26,9 @@ angular.module('imageShop.album', [])
                 id = albumService.album.key;
             } else {
                 $location.path('/');
+                albumService.invalidAlbum = true;
+                albumService.album.key = null;
+                albumService.album.id = null;
                 return;
             }
 
@@ -39,7 +42,9 @@ angular.module('imageShop.album', [])
                 vm.totalPhotos = vm.album.photos.length;
                 vm.pageChanged();
             }, function (response) {
-                alert(response.data.error.message); //TODO
+                albumService.invalidAlbum = true;
+                albumService.album.key = null;
+                albumService.album.id = null;
                 $location.path('/');
             });
         };
@@ -126,6 +131,7 @@ angular.module('imageShop.album', [])
         }
     };
     }).service('albumService', function() {
+        this.invalidAlbum = false;
         this.album = {
             'id': null,
             'key': null
