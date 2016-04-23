@@ -124,18 +124,12 @@ angular.module('imageShop.order', [])
         };
 
         this.order = function () {
-            var modalInstance = $uibModal.open({
-                templateUrl: 'views/public/order/orderDialog.html',
-                controller: 'OrderDialogController as ctrl',
-                size: 'lg'
-            });
-
-            modalInstance.album = vm.album;
-            modalInstance.price = vm.price;
-            modalInstance.finish = vm.all.finish;
             var orders = [];
             for (var key in vm.orders) {
                 for (var i = 0; i<vm.orders[key].length; i++) {
+                    if (vm.orders[key][i].size < 0) {
+                        break;
+                    }
                     orders.push({
                         photo: key,
                         size: getSize(vm.orders[key][i].size).text,
@@ -145,6 +139,20 @@ angular.module('imageShop.order', [])
                 }
 
             }
+            if (orders.length < 1) {
+                return;
+            }
+
+            var modalInstance = $uibModal.open({
+                templateUrl: 'views/public/order/orderDialog.html',
+                controller: 'OrderDialogController as ctrl',
+                size: 'lg'
+            });
+
+            modalInstance.album = vm.album;
+            modalInstance.price = vm.price;
+            modalInstance.finish = vm.all.finish;
+
 
             modalInstance.orders = orders;
         };
