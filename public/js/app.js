@@ -8,6 +8,7 @@ angular.module('imageShop', [
     'ngSanitize',
     'pascalprecht.translate',
     'ngNotify',
+    'imageShop.notifyService',
     'imageShop.home',
     'imageShop.albums',
     'imageShop.album',

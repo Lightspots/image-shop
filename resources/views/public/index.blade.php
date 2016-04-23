@@ -16,6 +16,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/ng-notify/dist/ng-notify.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/notifyService.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/home/home.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/albums/album.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/album/album.js') }}"></script>
