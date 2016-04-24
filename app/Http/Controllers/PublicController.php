@@ -60,8 +60,9 @@ class PublicController extends Controller
     public function order(Request $request)
     {
         if (!$request->firstname or !$request->lastname or !$request->address or !$request->zip
-        or !$request->city or !$request->finish or !$request->price or !$request->album
-        or !$request->photos or !$request->agb) {
+            or !$request->city or !$request->finish or !$request->price or !$request->album
+            or !$request->photos or !$request->agb
+        ) {
             return \Response::json([
                 'error' => [
                     'message' => 'Please Provide all required fields'
@@ -126,6 +127,8 @@ class PublicController extends Controller
             'data' => 'created'
         ], 201);
     }
+
+
 
     private function transformAlbums($albums)
     {
