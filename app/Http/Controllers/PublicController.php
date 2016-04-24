@@ -10,7 +10,13 @@ namespace App\Http\Controllers;
 
 
 use App\Album;
+use App\Order;
+use App\Photo;
+use App\Size;
 use SplFileInfo;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
 
 class PublicController extends Controller
 {
@@ -49,6 +55,76 @@ class PublicController extends Controller
         return \Response::json([
             'data' => $album
         ], 200);
+    }
+
+    public function order(Request $request)
+    {
+        if (!$request->firstname or !$request->lastname or !$request->address or !$request->zip
+        or !$request->city or !$request->finish or !$request->price or !$request->album
+        or !$request->photos or !$request->agb) {
+            return \Response::json([
+                'error' => [
+                    'message' => 'Please Provide all required fields'
+                ]
+            ], 422);
+        }
+
+        $o = [
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'street' => $request->address,
+            'zip' => $request->zip,
+            'city' => $request->city,
+            'email' => $request->email,
+            'finish' => $request->finish,
+            'price' => $request->price,
+            'remark' => $request->remark,
+            'album_id' => $request->album['id']
+        ];
+
+        $order = Order::create($o);
+
+        $id = $order->id;
+        $path = $request->album['path'];
+
+        $photos = $request->photos;
+        $error = false;
+        foreach ($photos as $key => $p) {
+            foreach ($p as $entry) {
+                $entry['order_id'] = $id;
+                $entry['path'] = $path . '/' . $key;
+                $entry['count'] = $entry['piece'];
+
+                $s = Size::find($entry['size']);
+                if (!$s) {
+                    $error = true;
+                    break;
+                }
+
+                $entry['size'] = $s->text;
+                unset($entry['piece']);
+                Photo::create($entry);
+            }
+            if ($error) {
+                break;
+            }
+        }
+
+        if ($error) {
+            $order->deleted = true;
+            $order->save();
+            return \Response::json([
+                'error' => [
+                    'message' => 'Error while saving Photos'
+                ]
+            ], 422);
+        }
+
+        //TODO SendMail
+
+        return \Response::json([
+            'data' => 'created'
+        ], 201);
     }
 
     private function transformAlbums($albums)

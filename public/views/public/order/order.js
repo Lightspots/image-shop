@@ -153,9 +153,34 @@ angular.module('imageShop.order', [])
             modalInstance.album = vm.album;
             modalInstance.price = vm.price;
             modalInstance.finish = vm.all.finish;
-
-
             modalInstance.orders = orders;
+            
+            modalInstance.result.then(function (person) {
+                var config = {
+                    headers: {
+                        'Content-Type': 'application/json;'
+                    }
+                };
+
+                var order = person;
+                order.photos = vm.orders;
+                order.album = vm.album;
+                order.finish = vm.all.finish;
+                order.price = vm.price;
+
+                $http.post('api/orders', order, config).then(function (response) {
+                    if (response.status == 201) {//Updated
+                        orderService.orderDone = true;
+                        $location.path('/');
+                    } else {
+                        notifyService.warn('HTTP_ERROR');
+                        console.log(response);
+                    }
+                }, function (response) {
+                    notifyService.warn('HTTP_ERROR');
+                    console.log(response);
+                });
+            });
         };
 
         init();
@@ -202,4 +227,5 @@ angular.module('imageShop.order', [])
         }
     };
     }).service('orderService', function () {
+        this.orderDone = false;
     });

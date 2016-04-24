@@ -36,6 +36,7 @@ Route::group(['prefix' => 'api'], function(){
 Route::group(['prefix' => 'api'], function(){
     Route::get('publicalbums', 'PublicController@publicAlbums');
     Route::get('publicalbums/{id}', 'PublicController@show');
+    Route::post('orders', 'PublicController@order');
 });
 
 /*

@@ -36,6 +36,7 @@
   "FORM_FINISH": "Papierqualität",
   "FORM_SUMMARYPRICE": "Gesamtbetrag",
   "FORM_SEND_ORDER": "Bestellung absenden",
+  "ORDER_SUCCESSFULL": "Ihre Bestellung wurde erfolgreich übermittelt, eine Bestätigungsmail finden Sie demnächst in Ihrem Postfach",
   "REMOVE": "Entfernen",
   "PIECE": "Stk.",
   "SET_VALUES": "Übernehmen",
