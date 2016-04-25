@@ -144,8 +144,11 @@ class AlbumController extends Controller
                     $im = imagecreatefrompng($imgPath);
                     list($width, $height) = getimagesize($imgPath);
                     $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0], env('SHOP_SMALLIMAGESIZE'), 't_');
-                    $this->drawLines($im, $width, $height);
                     $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0], env('SHOP_IMAGESIZE'), 'c_');
+                    imagedestroy($im);
+                    $im = imagecreatefrompng($this->getAlbumDir($album->path . '/c_' . $image[0]));
+                    $this->drawLines($im, $width, $height);
+                    imagepng($im, $this->getAlbumDir($album->path . '/c_' . $image[0]));
                     imagedestroy($im);
                     break;
                 case "jpg":
@@ -153,8 +156,11 @@ class AlbumController extends Controller
                     $im = imagecreatefromjpeg($imgPath);
                     list($width, $height) = getimagesize($imgPath);
                     $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0], env('SHOP_SMALLIMAGESIZE'), 't_');
-                    $this->drawLines($im, $width, $height);
                     $this->createThumb($im, $width, $height, $image[1], $this->getAlbumDir($album->path), $image[0], env('SHOP_IMAGESIZE'), 'c_');
+                    imagedestroy($im);
+                    $im = imagecreatefromjpeg($this->getAlbumDir($album->path . '/c_' . $image[0]));
+                    $this->drawLines($im, $width, $height);
+                    imagejpeg($im, $this->getAlbumDir($album->path . '/c_' . $image[0]));
                     imagedestroy($im);
                     break;
                 default:
