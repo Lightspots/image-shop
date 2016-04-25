@@ -21,7 +21,7 @@
     <script type="text/javascript" src="{{ asset('views/public/albums/album.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/album/album.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/public/order/order.js') }}"></script>
-
+    <script type="text/javascript" src="{{ asset('views/public/agb/agb.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
@@ -69,7 +69,7 @@
 
 
 <footer class="text-center footer">
-    <p><script>document.write(new Date().getFullYear());</script> &copy; <a href="{{env('SHOP_HOMEPAGEURL')}}" style="color: #9F9F9F; text-decoration: none;">{{env('SHOP_HOMEPAGEURL')}}</a> - <a href="" style="color: #9F9F9F; text-decoration: none;" translate="IMPRESSUM"></a></p>
+    <p><script>document.write(new Date().getFullYear());</script> &copy; <a href="{{env('SHOP_HOMEPAGEURL')}}" style="color: #9F9F9F; text-decoration: none;">{{env('SHOP_HOMEPAGEURL')}}</a> - <a href="#impressum" style="color: #9F9F9F; text-decoration: none;" translate="IMPRESSUM"></a> - <a href="#agb" style="color: #9F9F9F; text-decoration: none;" translate="AGB"></a></p>
     <p>Developed By <a href="http://grisu118.ch" style="color: #9F9F9F; text-decoration: none;">http://grisu118.ch</a></p>
 </footer>
 </body>

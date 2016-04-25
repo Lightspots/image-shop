@@ -12,7 +12,8 @@ angular.module('imageShop', [
     'imageShop.home',
     'imageShop.albums',
     'imageShop.album',
-    'imageShop.order'
+    'imageShop.order',
+    'imageShop.agb'
 ]).config(['$stateProvider', '$urlRouterProvider', '$translateProvider', function($stateProvider, $urlRouterProvider, $translateProvider) {
     $urlRouterProvider.otherwise('/');
 
