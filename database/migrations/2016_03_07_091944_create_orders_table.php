@@ -22,9 +22,11 @@ class CreateOrdersTable extends Migration
             $table->string('zip');
             $table->string('city');
             $table->string('email');
+            $table->string('phone');
             $table->text('remark')->nullable();
             $table->decimal('price');
             $table->string('finish');
+            $table->boolean('mailSend')->default(false);
             $table->boolean('deleted');
             $table->timestamps();
         });

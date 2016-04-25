@@ -25,6 +25,7 @@
   "FORM_ZIP": "Postleitzahl",
   "FORM_CITY": "Ort",
   "FORM_EMAIL": "E-Mail",
+  "FORM_PHONE": "Telefon",
   "FORM_REMARKS": "Anmerkungen",
   "FORM_PAYTYPE": "Zahlungsart",
   "FORM_PAY_BILL": "Rechnung",

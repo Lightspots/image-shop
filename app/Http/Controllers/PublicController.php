@@ -57,10 +57,10 @@ class PublicController extends Controller
         ], 200);
     }
 
-    public function order(Request $request)
+    public function order(Request $request) //TODO Add Phone Number
     {
         if (!$request->firstname or !$request->lastname or !$request->address or !$request->zip
-            or !$request->city or !$request->finish or !$request->price or !$request->album
+            or !$request->city or !$request->email or !$request->phone or !$request->finish or !$request->price or !$request->album
             or !$request->photos or !$request->agb
         ) {
             return \Response::json([
@@ -77,6 +77,7 @@ class PublicController extends Controller
             'zip' => $request->zip,
             'city' => $request->city,
             'email' => $request->email,
+            'phone' => $request->phone,
             'finish' => $request->finish,
             'price' => $request->price,
             'remark' => $request->remark,
@@ -121,14 +122,33 @@ class PublicController extends Controller
             ], 422);
         }
 
-        //TODO SendMail
-
         return \Response::json([
             'data' => 'created'
         ], 201);
     }
 
+    public function mail()
+    {
+        //Function called by Cronjob of Webserver!
 
+        $orders = Order::with('Photo')->with('Album')->where('deleted', '=', false)->where('mailSend', '=', false)->get();
+
+        foreach ($orders as $order) {
+            foreach ($order->photo as $photo) {
+                $path = explode('/', $photo->path);
+                $photo->name = end($path);
+            }
+
+            \Mail::send('emails.customer', ['order' => $order], function ($message) use ($order) {
+                $message->from(env('MAIL_ADDRESS'), $name = null);
+                $message->to($order->email, $name = null);
+                $message->cc(env('MAIL_ADDRESS'), $name = null);
+                $message->subject('#' . $order->id . ':' . $order->album->name . ' - ' . env('MAIL_SUBJECT'));
+            });
+            $order->mailSend = true;
+            $order->save();
+        }
+    }
 
     private function transformAlbums($albums)
     {

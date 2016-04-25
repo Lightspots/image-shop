@@ -36,6 +36,12 @@
                 <input type="text" class="form-control" id="inputCity" name="inputCity" ng-model="ctrl.person.city" ng-required="true">
             </div>
         </div>
+        <div class="form-group" ng-class="{ 'has-error': orderForm.inputPhone.$invalid }">
+            <label for="inputPhone" class="col-sm-2 control-label"><span translate="FORM_PHONE"></span></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPhone" name="inputPhone" ng-model="ctrl.person.phone" ng-required="true">
+            </div>
+        </div>
         <div class="form-group" ng-class="{ 'has-error': orderForm.inputEmail.$invalid }">
             <label for="inputEmail" class="col-sm-2 control-label"><span translate="FORM_EMAIL"></span></label>
             <div class="col-sm-10">
