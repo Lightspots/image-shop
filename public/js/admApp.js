@@ -14,7 +14,7 @@ angular.module('imageShopAdm', [
     'imageShopAdm.order'
 ]).config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($stateProvider, $urlRouterProvider, $authProvider) {
 
-    $authProvider.loginUrl = 'image-shop/public/api/authenticate';
+    $authProvider.loginUrl = 'api/authenticate';
     // $urlRouterProvider.otherwise('/view1');
     $urlRouterProvider.otherwise('/auth');
 }]).run(['$rootScope', '$state', '$auth', 'PermissionStore', function ($rootScope, $state, $auth, PermissionStore) {
