@@ -78,8 +78,9 @@
         <li ng-repeat="o in ctrl.orders"
              controller="ctrl">
             <span translate="FORM_FILE"></span>: {{o.photo}}, <span translate="FORM_FORMAT"></span>: {{o.size}}, {{o.piece}} <span translate="PIECE"></span>
-            <span translate="FORM_FOR"></span> {{o.price}}
+            <span translate="FORM_FOR"></span> <span translate="CURRENCY"></span> {{o.price}}
         </li>
+        <li><span translate="FORM_SHIPPING_COSTS"></span> <span translate="CURRENCY"></span>: {{ctrl.shippingCosts}}</li>
         </ul>
         <b translate="FORM_SUMMARYPRICE"></b> <b translate="CURRENCY"></b> <b>{{ctrl.price}}</b>
     </div>
