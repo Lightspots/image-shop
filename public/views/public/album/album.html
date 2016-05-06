@@ -21,7 +21,7 @@
     }
 </style>
 <div class="album-pag">
-<uib-pagination boundary-links="true" total-items="ctrl.totalPhotos" ng-model="ctrl.currentPage" items-per-page="6" ng-change="ctrl.pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+<uib-pagination boundary-links="true" total-items="ctrl.totalPhotos" ng-model="ctrl.currentPage" items-per-page="6" ng-change="ctrl.pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="10"></uib-pagination>
 </div>
 <div>
     <div class="row" ng-repeat="p in ctrl.currentPhotos" photo-row-element photos="p"
