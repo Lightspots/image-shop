@@ -176,11 +176,11 @@ angular.module('imageShop.order', [])
                         orderService.orderDone = true;
                         $location.path('/');
                     } else {
-                        notifyService.warn('HTTP_ERROR');
+                        notifyService.warn('HTTP_ERROR', response.status);
                         console.log(response);
                     }
                 }, function (response) {
-                    notifyService.warn('HTTP_ERROR');
+                    notifyService.warn('HTTP_ERROR', response.status);
                     console.log(response);
                 });
             });
