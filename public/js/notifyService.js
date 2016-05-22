@@ -5,9 +5,9 @@ angular.module('imageShop.notifyService', [])
     .service('notifyService', ['$translate', 'ngNotify', function ($translate, ngNotify) {
         var vm = this;
 
-        this.warn = function (key, code) {
+        this.warn = function (key, code, error) {
             $translate(key).then(function (txt) {
-                ngNotify.set(txt + " - " + code, {
+                ngNotify.set(txt + " - " + code + " (" + error + ")", {
                     type: 'warn',
                     duration: 5000,
                     html: true
