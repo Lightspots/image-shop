@@ -7,11 +7,19 @@ angular.module('imageShop.notifyService', [])
 
         this.warn = function (key, code, error) {
             $translate(key).then(function (txt) {
-                ngNotify.set(txt + " - " + code + " (" + error + ")", {
-                    type: 'warn',
-                    duration: 5000,
-                    html: true
-                });
+                if (code) {
+                    ngNotify.set(txt + " - " + code + " (" + error + ")", {
+                        type: 'warn',
+                        duration: 5000,
+                        html: true
+                    });
+                } else {
+                    ngNotify.set(txt, {
+                        type: 'warn',
+                        duration: 5000,
+                        html: true
+                    });
+                }
             });
         };
 
