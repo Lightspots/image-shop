@@ -17,15 +17,15 @@ The Backend is implemented with PHP and the [Laravel Framework](https://laravel.
 
 ## Installation
 
-* Download the Laravel Dependencies with composer.
-* Edit the information for your admin user in /database/seeds/USersTableSeeder.php 
+* Download the Laravel Dependencies with `composer install`
+* Edit the information for your admin user in */database/seeds/USersTableSeeder.php*
 * Create the database in mysql
 * Create an .env file from the .env.example and fill it with needed information
-* Setup the Database with php artisan migrate --seed
-* Generate the application key with php artisan key:generate
-* Check that php has write permission on /bootstrap/cacke, /storage, and /public/albums
-* Install Javascript Dependencies with bower in /public
-* Customize your Messages in /public/lang/de_CH.json
+* Setup the Database with `php artisan migrate --seed`
+* Generate the application key with `php artisan key:generate`
+* Check that php has write permission on */bootstrap/cacke*, */storage*, and */public/albums*
+* Install Javascript Dependencies with bower in */public*
+* Customize your Messages in */public/lang/de_CH.json*
 
 ## License
 
