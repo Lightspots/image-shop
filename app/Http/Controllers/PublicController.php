@@ -93,22 +93,12 @@ class PublicController extends Controller
 
         $photos = $request->photos;
         \Log::info("Start saving Photos");
-        foreach ($photos as $key => $p) {
-            foreach ($p as $entry) {
+        foreach ($photos as $entry) {
                 $entry['order_id'] = $id;
-                $entry['path'] = $path . '/' . $key;
+                $entry['path'] = $path . '/' . $entry['photo'];
                 $entry['count'] = $entry['piece'];
-
-                $s = Size::find($entry['size']);
-                if (!$s) {
-                    \Log::error('Format not found with id: ' . $entry['size']);
-                    $entry['size'] = 'unknwon - ' . $entry['size'];
-                } else {
-                    $entry['size'] = $s->text;
-                }
                 unset($entry['piece']);
                 Photo::create($entry);
-            }
         }
 
         \Log::info('Exit Order');

@@ -166,7 +166,7 @@ angular.module('imageShop.order', [])
                 };
 
                 var order = person;
-                order.photos = vm.orders;
+                order.photos = orders;
                 order.album = vm.album;
                 order.finish = vm.all.finish;
                 order.price = vm.price;
