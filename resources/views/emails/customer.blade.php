@@ -31,7 +31,7 @@ Papierqualität: @if ($order->finish == 'DULL')
 @foreach ($order->photo as $photo)
     <li>Datei: {{$photo->name}}, Format: {{$photo->size}}, {{$photo->count}} Stk. für {{$photo->price}} CHF</li>
 @endforeach
-    <li>Versandkosten: 5 CHF</li>
+    <li>Versandkosten: {{$shippingCosts}} CHF</li>
 </ul>
 <b>Total: {{$order->price}} CHF</b>
 <hr>

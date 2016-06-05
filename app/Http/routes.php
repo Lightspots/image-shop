@@ -30,6 +30,9 @@ Route::group(['prefix' => 'api'], function(){
     Route::get('orders', 'OrderController@index');
     Route::get('orders/{id}', 'OrderController@show');
     Route::delete('orders/{id}', 'OrderController@destroy');
+    Route::get('preferences', 'PreferencesController@index');
+    Route::get('preferences/{key}', 'PreferencesController@show');
+    Route::put('preferences/{key}', 'PreferencesController@update');
 });
 
 //PUBLIC API

@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Album;
 use App\Order;
 use App\Photo;
+use App\Preferences;
 use App\Size;
 use SplFileInfo;
 use Illuminate\Http\Request;
@@ -112,6 +113,7 @@ class PublicController extends Controller
         //Function called by Cronjob of Webserver!
 
         $orders = Order::with('Photo')->with('Album')->where('deleted', '=', false)->where('mailSend', '=', false)->get();
+        $shippingCosts = Preferences::find('shippingCosts');
 
         foreach ($orders as $order) {
             foreach ($order->photo as $photo) {
@@ -119,7 +121,7 @@ class PublicController extends Controller
                 $photo->name = end($path);
             }
 
-            \Mail::send('emails.customer', ['order' => $order], function ($message) use ($order) {
+            \Mail::send('emails.customer', ['order' => $order, 'shippingCosts' => $shippingCosts], function ($message) use ($order) {
                 $message->from(env('MAIL_ADDRESS'), $name = null);
                 $message->to($order->email, $name = null);
                 $message->cc(env('MAIL_ADDRESS'), $name = null);
