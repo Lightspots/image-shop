@@ -121,7 +121,7 @@ class PublicController extends Controller
                 $photo->name = end($path);
             }
 
-            \Mail::send('emails.customer', ['order' => $order, 'shippingCosts' => $shippingCosts], function ($message) use ($order) {
+            \Mail::send('emails.customer', ['order' => $order, 'shippingCosts' => $shippingCosts->value], function ($message) use ($order) {
                 $message->from(env('MAIL_ADDRESS'), $name = null);
                 $message->to($order->email, $name = null);
                 $message->cc(env('MAIL_ADDRESS'), $name = null);

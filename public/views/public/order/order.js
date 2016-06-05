@@ -230,8 +230,12 @@ angular.module('imageShop.order', [])
             controller: '=controller'
         }
     };
-    }).service('orderService', function () {
+    }).service('orderService', ['$http', function ($http) {
+        var vm = this;
         this.orderDone = false;
 
-        this.shippingCosts = 5.0
-    });
+        $http.get('api/preferences/shippingCosts').then(function (response) {
+            vm.shippingCosts = parseFloat(response.data.data.value);
+            console.log(vm.shippingCosts);
+        });
+    }]);
