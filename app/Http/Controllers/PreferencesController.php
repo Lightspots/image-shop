@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class SizeController extends Controller
+class PreferencesController extends Controller
 {
 
     public function __construct(){
@@ -51,7 +51,7 @@ class SizeController extends Controller
 
         $pref = Preferences::find($request->key);
 
-        if ($pref->type != 'aFlaot' || floatval($request->value) < 0) {
+        if ($pref->type != 'aFloat' || floatval($request->value) < 0 || !is_numeric($request->value)) {
             return \Response::json([
                 'error' => [
                     'message' => 'Value has wrong Type!'

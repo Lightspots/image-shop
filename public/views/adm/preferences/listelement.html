@@ -1,0 +1,4 @@
+<tr>
+    <td>{{preferences.key}}</td>
+    <td><a href="#" editable-text="preferences.value" onbeforesave="controller.updatePreference(preferences.key, $data)">{{ preferences.value || 'empty' }}</a></td>
+</tr>

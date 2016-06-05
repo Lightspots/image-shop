@@ -10,6 +10,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/satellizer/satellizer.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-permission/dist/angular-permission.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-animate/angular-animate.js') }}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/angular-xeditable/dist/js/xeditable.js')}}"></script>
 
     <script type="text/javascript" src="{{ asset('js/admApp.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/auth/auth.js') }}"></script>
@@ -17,6 +18,7 @@
     <script type="text/javascript" src="{{ asset('views/adm/size/size.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/album/album.js') }}"></script>
     <script type="text/javascript" src="{{ asset('views/adm/order/order.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('views/adm/preferences/preferences.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
@@ -24,6 +26,7 @@
 
     <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('bower_components/components-font-awesome/css/font-awesome.css')}}">
+    <link href="{{asset('bower_components/angular-xeditable/dist/css/xeditable.css')}}" rel="stylesheet">
 
     <style type="text/css">
         [ng\:cloak], [ng-cloak], .ng-cloak {
@@ -55,6 +58,7 @@
                 <li ui-sref-active='active'><a ui-sref="home">Home</a></li>
                 <li ui-sref-active='active'><a ui-sref="albums">Album</a></li>
                 <li ui-sref-active='active'><a ui-sref="sizes">Size</a></li>
+                <li ui-sref-active='active'><a ui-sref="preferences">Preferences</a></li>
                 <li ui-sref-active='active'><a ui-sref="orders">Orders</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="currentUser != null">

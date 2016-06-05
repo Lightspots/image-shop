@@ -1,0 +1,14 @@
+<h2>Preferences</h2>
+<hr>
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Wert</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="p in ctrl.preferences" preferences-element preferences="p"
+        controller="ctrl"></tr>
+    </tbody>
+</table>
