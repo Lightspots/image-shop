@@ -21,7 +21,7 @@ angular.module('imageShopAdm.size', [])
     .controller('SizeCtrl', ['$state', '$http', '$rootScope', '$uibModal', '$location', function ($state, $http, $rootScope, $uibModal, $location) {
         var vm = this;
 
-        this.getOrders = function () {
+        this.getSize = function () {
             $http.get('api/sizes').then(function (response) {
                 if (response.data.error) {
                     alert("Error");
@@ -34,7 +34,7 @@ angular.module('imageShopAdm.size', [])
         };
 
         var init = function () {
-            vm.getOrders();
+            vm.getSize();
         };
 
         init();
@@ -42,7 +42,7 @@ angular.module('imageShopAdm.size', [])
         this.delete = function (id) {
             if (confirm('Delete Size ' + id + '?')) {
                 $http.delete('api/sizes/' + id).then(function (response) {
-                    vm.getOrders();
+                    vm.getSize();
                 }, function (response) {
                     console.log(response);
                 });
@@ -69,7 +69,7 @@ angular.module('imageShopAdm.size', [])
 
                 $http.post('api/sizes', size, config).then(function (response) {
                     if (response.status == 201) {//Created
-                        vm.getOrders();
+                        vm.getSize();
                     }
                 }, function (response) {
                     console.log(response);
@@ -96,7 +96,7 @@ angular.module('imageShopAdm.size', [])
 
                     $http.put('api/sizes/' + id, size, config).then(function (response) {
                         if (response.status == 200) {//Updated
-                            vm.getOrders();
+                            vm.getSizes();
                         }
                     }, function (response) {
                         console.log(response);
