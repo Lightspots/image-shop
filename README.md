@@ -6,6 +6,13 @@ The customer and the holder of the shop will receive an email with the details (
 
 The Backend is implemented with PHP and the [Laravel Framework](https://laravel.com/) and uses a [MySQL Database](https://www.mysql.de/). The single page frontend is implemeted using [Angular.js](https://www.angularjs.org/) and CSS3.
 
+## Screens
+
+![Startpage](_files/screens/startpage.png)
+![Images](_files/screens/images.png)
+![Image Detail](_files/screens/image_detail.png)
+![Admin Albums](_files/screens/admin_albums.png)
+
 ## Requirements
 
 * PHP >= 7.0
