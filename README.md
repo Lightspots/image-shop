@@ -30,7 +30,7 @@ The Backend is implemented with PHP and the [Laravel Framework](https://laravel.
 * Create an .env file from the .env.example and fill it with needed information
 * Setup the Database with `php artisan migrate --seed`
 * Generate the application key with `php artisan key:generate`
-* Check that php has write permission on */bootstrap/cacke*, */storage*, and */public/albums*
+* Check that php has write permission on */bootstrap/cache*, */storage*, and */public/albums*
 * Install Javascript Dependencies with bower in */public*
 * Customize your Messages in */public/lang/de_CH.json*
 
