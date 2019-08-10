@@ -132,6 +132,13 @@ class PublicController extends Controller
         }
     }
 
+    public function mailQueueSize()
+    {
+      $orders = Order::with('Photo')->with('Album')->where('deleted', '=', false)->where('mailSend', '=', false)->get();
+
+      return count($orders);
+    }
+
     private function transformAlbums($albums)
     {
         return array_map([$this, 'transformAlbum'], $albums->toArray());
