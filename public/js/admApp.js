@@ -5,6 +5,7 @@ angular.module('imageShopAdm', [
     'ui.router',
     'satellizer',
     'permission',
+    'permission.ui',
     'ui.bootstrap',
     'ngAnimate',
     'xeditable',
@@ -20,7 +21,7 @@ angular.module('imageShopAdm', [
     $authProvider.loginUrl = 'api/authenticate';  //server
     // $urlRouterProvider.otherwise('/view1');
     $urlRouterProvider.otherwise('/auth');
-}]).run(['$rootScope', '$state', '$auth', 'PermissionStore', 'editableOptions', function ($rootScope, $state, $auth, PermissionStore, editableOptions) {
+}]).run(['$rootScope', '$state', '$auth', 'PermPermissionStore', 'editableOptions', function ($rootScope, $state, $auth, PermPermissionStore, editableOptions) {
 
     editableOptions.theme = 'bs3';
 
@@ -32,8 +33,9 @@ angular.module('imageShopAdm', [
         });
     };
     $rootScope.currentUser = JSON.parse(localStorage.getItem('user'));
+    $rootScope.isAuthenticated = $auth.isAuthenticated;
 
-    PermissionStore
+    PermPermissionStore
         .definePermission('anonymous', function (stateParams) {
             // If the returned value is *truthy* then the user has the role, otherwise they don't
             // var User = JSON.parse(localStorage.getItem('user'));
@@ -43,7 +45,7 @@ angular.module('imageShopAdm', [
             }
             return false;
         });
-    PermissionStore
+    PermPermissionStore
         .definePermission('isloggedin', function (stateParams) {
             // If the returned value is *truthy* then the user has the role, otherwise they don't
             // console.log("isloggedin ", $auth.isAuthenticated());

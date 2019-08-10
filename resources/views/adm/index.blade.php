@@ -9,6 +9,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/angular-ui-router/release/angular-ui-router.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/satellizer/satellizer.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-permission/dist/angular-permission.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/angular-permission/dist/angular-permission-ui.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-animate/angular-animate.js') }}"></script>
     <script type="text/javascript" src="{{asset('bower_components/angular-xeditable/dist/js/xeditable.js')}}"></script>
 
@@ -61,7 +62,7 @@
                 <li ui-sref-active='active'><a ui-sref="preferences">Preferences</a></li>
                 <li ui-sref-active='active'><a ui-sref="orders">Orders</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right" ng-show="currentUser != null">
+            <ul class="nav navbar-nav navbar-right" ng-show="isAuthenticated()">
                 <li><a href="">Welcome, @{{currentUser.name}}</a></li>
                 <li class="dropdown">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Profile <span class="caret"></span></a>
@@ -70,7 +71,7 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right" ng-show="currentUser == null">
+            <ul class="nav navbar-nav navbar-right" ng-show="!isAuthenticated()">
                 <li ui-sref-active='active'><a ui-sref="auth">Login</a></li>
             </ul>
         </div>

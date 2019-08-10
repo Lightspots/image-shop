@@ -9,6 +9,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/angular-ui-router/release/angular-ui-router.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/satellizer/satellizer.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-permission/dist/angular-permission.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/angular-permission/dist/angular-permission-ui.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-animate/angular-animate.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-sanitize/angular-sanitize.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/angular-translate/angular-translate.js') }}"></script>
@@ -69,7 +70,7 @@
 
 
 <footer class="text-center footer">
-    <p><script>document.write(new Date().getFullYear());</script> &copy; <a href="{{env('SHOP_HOMEPAGEURL')}}" style="color: #9F9F9F; text-decoration: none;">{{env('SHOP_HOMEPAGEURL')}}</a> - <a href="#impressum" style="color: #9F9F9F; text-decoration: none;" translate="IMPRESSUM"></a> - <a href="#agb" style="color: #9F9F9F; text-decoration: none;" translate="AGB"></a></p>
+    <p><script>document.write(new Date().getFullYear());</script> &copy; <a href="{{env('SHOP_HOMEPAGEURL')}}" style="color: #9F9F9F; text-decoration: none;">{{env('SHOP_HOMEPAGEURL')}}</a> - <a ui-sref="impressum" style="color: #9F9F9F; text-decoration: none;" translate="IMPRESSUM"></a> - <a ui-sref="agb" style="color: #9F9F9F; text-decoration: none;" translate="AGB"></a></p>
     <p>Developed By <a href="http://grisu118.ch" style="color: #9F9F9F; text-decoration: none;">http://grisu118.ch</a></p>
 </footer>
 </body>

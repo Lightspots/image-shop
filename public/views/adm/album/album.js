@@ -21,6 +21,8 @@ angular.module('imageShopAdm.album', [])
     .controller('AlbumCtrl', ['$state', '$http', '$rootScope', '$uibModal', '$location', function ($state, $http, $rootScope, $uibModal, $location) {
         var vm = this;
 
+        this.runningProcesses = {};
+
         this.getAlbums = function () {
             $http.get('api/albums').then(function (response) {
                 if (response.data.error) {
@@ -69,7 +71,7 @@ angular.module('imageShopAdm.album', [])
                 };
 
                 $http.post('api/albums', album, config).then(function (response) {
-                    if (response.status == 201) {//Created
+                    if (response.status === 201) {//Created
                         vm.getAlbums();
                     }
                 }, function (response) {
@@ -80,15 +82,15 @@ angular.module('imageShopAdm.album', [])
 
         this.openEditAlbumModal = function (id) {
 
-            $http.get('api/albums/' + id).success(function (data) {
+            $http.get('api/albums/' + id).then(function (response) {
                 var modalInstance = $uibModal.open({
                     templateUrl: 'views/adm/album/createAlbumDialog.html',
                     controller: 'AlbumDetailDialogController as ctrl'
                 });
                 
-                data.data.public = data.data.public == 1;
+                response.data.public = response.data.public === 1;
 
-                modalInstance.album = data.data;
+                modalInstance.album = response.data;
 
                 modalInstance.result.then(function (album) {
                     var config = {
@@ -98,7 +100,7 @@ angular.module('imageShopAdm.album', [])
                     };
 
                     $http.put('api/albums/' + id, album, config).then(function (response) {
-                        if (response.status == 200) {//Updated
+                        if (response.status === 200) {//Updated
                             vm.getAlbums();
                         }
                     }, function (response) {
@@ -109,15 +111,22 @@ angular.module('imageShopAdm.album', [])
         };
 
         this.process = function (id) {
+            this.runningProcesses[id] = true;
             $http.post('api/albums/process/' + id).then(function (response) {
-                if (response.status == 200) {
+                if (response.status === 200) {
                     alert('Done');
                 } else {
                     alert('Failure');
                 }
+                vm.runningProcesses[id] = false;
             }, function (response) {
                 alert("Error");
+                vm.runningProcesses[id] = false;
             });
+        }
+
+        this.disabled = function (id) {
+            return !!vm.runningProcesses[id];
         }
 
     }]).controller('AlbumDetailDialogController',

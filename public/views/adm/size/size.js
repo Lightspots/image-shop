@@ -79,13 +79,13 @@ angular.module('imageShopAdm.size', [])
 
         this.openEditSizeModal = function (id) {
 
-            $http.get('api/sizes/' + id).success(function (data) {
+            $http.get('api/sizes/' + id).then(function (response) {
                 var modalInstance = $uibModal.open({
                     templateUrl: 'views/adm/size/createSizeDialog.html',
                     controller: 'SizeDetailDialogController as ctrl'
                 });
-                data.data.price = parseFloat(data.data.price);
-                modalInstance.size = data.data;
+                response.data.price = parseFloat(response.data.price);
+                modalInstance.size = response.data;
 
                 modalInstance.result.then(function (size) {
                     var config = {

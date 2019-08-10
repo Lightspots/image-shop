@@ -17,16 +17,16 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.5.2",
-    "angular-ui-router": "^0.2.18",
+    "angular": "^1.7.8",
+    "angular-ui-router": "^1.0.22",
     "bootstrap": "^3.3.6",
     "angular-bootstrap": "^1.2.4",
     "components-font-awesome": "^4.5.0",
     "satellizer": "^0.14.0",
-    "angular-permission": "^2.3.2",
+    "angular-permission": "^5.3.2",
     "angular-animate": "^1.5.3",
-    "angular-translate": "^2.11.0",
-    "angular-translate-loader-static-files": "^2.11.0",
+    "angular-translate": "^2.18.1",
+    "angular-translate-loader-static-files": "^2.18.1",
     "angular-sanitize": "^1.5.3",
     "ng-notify": "^0.8.0",
     "angular-xeditable": "^0.1.12"

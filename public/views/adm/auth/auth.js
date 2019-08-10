@@ -3,7 +3,7 @@
  */
 angular.module('imageShopAdm.auth', [])
 
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('auth', {
                 url: '/auth',
@@ -18,33 +18,32 @@ angular.module('imageShopAdm.auth', [])
             })
     }])
 
-    .controller('AuthCtrl', ['$auth', '$state', '$http', '$rootScope', function($auth, $state, $http, $rootScope) {
+    .controller('AuthCtrl', ['$auth', '$state', '$http', '$rootScope', function ($auth, $state, $http, $rootScope) {
         var vm = this;
 
         vm.loginError = false;
         vm.loginErrorText = null;
 
-        vm.login = function() {
+        vm.login = function () {
 
             var credentials = {
                 email: vm.email,
                 password: vm.password
             };
 
-            $auth.login(credentials).then(function() {
+            $auth.login(credentials).then(function () {
                 vm.loginError = false;
                 vm.loginErrorText = null;
-                $http.get('api/authenticate/user').success(function(response){
-                        var user = JSON.stringify(response.user);
-                        localStorage.setItem('user', user);
-                        $rootScope.currentUser = response.user;
-                        $state.go('home');
-                    })
-                    .error(function(){
-                        vm.loginError = true;
-                        vm.loginErrorText = error.data.error;
-                        console.log(vm.loginErrorText);
-                    })
+                $http.get('api/authenticate/user').then(function (response) {
+                    var user = JSON.stringify(response.data.user);
+                    localStorage.setItem('user', user);
+                    $rootScope.currentUser = response.data.user;
+                    $state.go('home');
+                }, function () {
+                    vm.loginError = true;
+                    vm.loginErrorText = error.data.error;
+                    console.log(vm.loginErrorText);
+                });
             }, function (response) {
                 vm.loginError = true;
                 vm.loginErrorText = response.data.error;
