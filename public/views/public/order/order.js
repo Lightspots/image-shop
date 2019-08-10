@@ -119,6 +119,9 @@ angular.module('imageShop.order', [])
                     price += vm.orders[key][i].price;
                 }
             }
+            if (price > 0) {
+                price += orderService.shippingCosts;
+            }
             vm.price = Math.round(price * 100) / 100;
             vm.pieces = count;
         };
@@ -163,7 +166,7 @@ angular.module('imageShop.order', [])
                 };
 
                 var order = person;
-                order.photos = vm.orders;
+                order.photos = orders;
                 order.album = vm.album;
                 order.finish = vm.all.finish;
                 order.price = vm.price;
@@ -173,11 +176,11 @@ angular.module('imageShop.order', [])
                         orderService.orderDone = true;
                         $location.path('/');
                     } else {
-                        notifyService.warn('HTTP_ERROR');
+                        notifyService.warn('HTTP_ERROR', response.status, response.data.error);
                         console.log(response);
                     }
                 }, function (response) {
-                    notifyService.warn('HTTP_ERROR');
+                    notifyService.warn('HTTP_ERROR', response.status, response.data.error);
                     console.log(response);
                 });
             });
@@ -186,12 +189,13 @@ angular.module('imageShop.order', [])
         init();
 
     }]).controller('OrderDialogController',
-    ['$uibModalInstance', '$translate' , '$scope', 'notifyService', function ($uibModalInstance, $translate, $scope, notifyService) {
+    ['$uibModalInstance', '$translate' , '$scope', 'notifyService','orderService', function ($uibModalInstance, $translate, $scope, notifyService, orderService) {
         var vm = this;
 
         this.album = $uibModalInstance.album;
         this.orders = $uibModalInstance.orders;
         this.price = $uibModalInstance.price;
+        this.shippingCosts = orderService.shippingCosts;
         $translate($uibModalInstance.finish).then(function (text) {
             vm.finish = text;
         });
@@ -228,4 +232,6 @@ angular.module('imageShop.order', [])
     };
     }).service('orderService', function () {
         this.orderDone = false;
+
+        this.shippingCosts = 5.0
     });

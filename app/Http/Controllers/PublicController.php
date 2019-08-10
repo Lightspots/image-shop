@@ -57,12 +57,14 @@ class PublicController extends Controller
         ], 200);
     }
 
-    public function order(Request $request) //TODO Add Phone Number
+    public function order(Request $request)
     {
+        \Log::info('New Order');
         if (!$request->firstname or !$request->lastname or !$request->address or !$request->zip
             or !$request->city or !$request->email or !$request->phone or !$request->finish or !$request->price or !$request->album
             or !$request->photos or !$request->agb
         ) {
+            \Log::warn('Order: Not all required fields provided!');
             return \Response::json([
                 'error' => [
                     'message' => 'Please Provide all required fields'
@@ -90,38 +92,16 @@ class PublicController extends Controller
         $path = $request->album['path'];
 
         $photos = $request->photos;
-        $error = false;
-        foreach ($photos as $key => $p) {
-            foreach ($p as $entry) {
+        \Log::info("Start saving Photos");
+        foreach ($photos as $entry) {
                 $entry['order_id'] = $id;
-                $entry['path'] = $path . '/' . $key;
+                $entry['path'] = $path . '/' . $entry['photo'];
                 $entry['count'] = $entry['piece'];
-
-                $s = Size::find($entry['size']);
-                if (!$s) {
-                    $error = true;
-                    break;
-                }
-
-                $entry['size'] = $s->text;
                 unset($entry['piece']);
                 Photo::create($entry);
-            }
-            if ($error) {
-                break;
-            }
         }
 
-        if ($error) {
-            $order->deleted = true;
-            $order->save();
-            return \Response::json([
-                'error' => [
-                    'message' => 'Error while saving Photos'
-                ]
-            ], 422);
-        }
-
+        \Log::info('Exit Order');
         return \Response::json([
             'data' => 'created'
         ], 201);
