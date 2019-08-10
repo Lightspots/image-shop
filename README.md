@@ -25,7 +25,7 @@ The Backend is implemented with PHP and the [Laravel Framework](https://laravel.
 ## Installation
 
 * Download the Laravel Dependencies with `composer install`
-* Edit the information for your admin user in */database/seeds/USersTableSeeder.php*
+* Edit the information for your admin user in */database/seeds/UsersTableSeeder.php*
 * Create the database in mysql
 * Create an .env file from the .env.example and fill it with needed information
 * Setup the Database with `php artisan migrate --seed`
@@ -33,6 +33,7 @@ The Backend is implemented with PHP and the [Laravel Framework](https://laravel.
 * Check that php has write permission on */bootstrap/cache*, */storage*, and */public/albums*
 * Install Javascript Dependencies with bower in */public*
 * Customize your Messages in */public/lang/de_CH.json*
+* Setup a cronjob or systemd timer which regular calls /api/mail to send pending mails.
 
 ## License
 
