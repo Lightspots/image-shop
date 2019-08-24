@@ -169,6 +169,7 @@ class AlbumController extends Controller
             \File::delete($imgPath);
         }
 
+        $this->fixPermissionsInDir($this->getAlbumDir($album->path));
 
         return \Response(200);
     }
@@ -281,6 +282,18 @@ class AlbumController extends Controller
             }
         }
         return $result;
+    }
+
+    private function fixPermissionsInDir($dir) {
+      $files = \File::files($dir);
+
+      foreach ($files as $file) {
+        $f = new SplFileInfo($file);
+        $ex = strtolower($f->getExtension());
+        if ($ex === "png" || $ex === "jpeg" || $ex === "jpg") {
+          chmod($file, 0664);
+        }
+      }
     }
 
 }
