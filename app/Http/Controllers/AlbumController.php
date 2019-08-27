@@ -64,6 +64,8 @@ class AlbumController extends Controller
 
         if (!\File::exists($this->getAlbumDir($album->path))) {
             \File::makeDirectory($this->getAlbumDir($album->path), 0777, true, true);
+            // change permissions as they are ignored in the above call
+            chmod($this->getAlbumDir($album->path), 0777);
         }
 
         return \Response::json([
