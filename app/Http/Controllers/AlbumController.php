@@ -58,7 +58,7 @@ class AlbumController extends Controller
         $album = Album::create($request->all());
 
         if (!$request->public) {
-            $album->key = Album::generateKey();
+            $album->key = $this->generateRandomAlbumKey();
             $album->save();
         }
 
@@ -92,7 +92,7 @@ class AlbumController extends Controller
         }
 
         if ($album->public && !$request->public) {
-            $album->key = Album::generateKey();
+            $album->key = $this->generateRandomAlbumKey();
         } elseif (!$album->public && $request->public) {
             $album->key = null;
         }
@@ -296,6 +296,17 @@ class AlbumController extends Controller
           chmod($file, 0664);
         }
       }
+    }
+
+    private function generateRandomAlbumKey() {
+      while(true) {
+        $key = Album::generateKey();
+        $count = Album::where('key', '=', $key)->count();
+        if ($count == 0) {
+          return $key;
+        }
+      }
+
     }
 
 }
